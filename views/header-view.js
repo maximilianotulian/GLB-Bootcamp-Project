@@ -1,12 +1,13 @@
 // LIBS
-React = require('react');
-ReactRouter = require('react-router');
-Link = ReactRouter.Link;
+var React = require('react');
+var ReactRouter = require('react-router');
+var Link = ReactRouter.Link;
+var classNames = require('classnames');
 
 var HeaderView = React.createClass({
     render: function () {
         return (
-            <ul>
+            <ul {...this.getProps()}>
                 <li>
                     <Link to="home">Home</Link>
                 </li>
@@ -27,7 +28,23 @@ var HeaderView = React.createClass({
                 </li>
             </ul>
         )
+    },
+
+    getProps: function () {
+        return {
+            className: this.getClass()
+        }
+    },
+
+    getClass: function () {
+        var classes = {
+            'header-view': true,
+            'style-type': true
+        };
+
+        return classNames(classes);
     }
+
 });
 
 module.exports = HeaderView;
