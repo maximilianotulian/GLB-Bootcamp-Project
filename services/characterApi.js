@@ -1,11 +1,12 @@
 // LIBS
 var $ = require('jquery');
-var localStorage = require('./localStorage');
 var _ = require('lodash');
 
 var CharacterApi = function () {
     this.key = '7bfpgbdmryu2vcrcxyf8f7psyjv86a6n';
     this.locale = 'en_US';
+    this.realm = 'Ragnaros';
+    this.name = 'DarkViciuz';
 };
 
 CharacterApi.prototype.get = function (attr) {
@@ -14,28 +15,55 @@ CharacterApi.prototype.get = function (attr) {
 CharacterApi.prototype.set = function (attr, value) {
     this[attr] = value;
 };
-CharacterApi.prototype.getRealmStatus = function () {
-    if (!localStorage.getObject('realms')) {
-        var onRequestSuccess = function (result) {
-            localStorage.setObject('realms', result.realms);
-        };
-        var onRequestError = function (xhr, status, error) {
-            console.log('something went brong ' + error);
-        };
+CharacterApi.prototype.getRealmStatus = function (success) {
 
-        $.ajax({
-            url: 'https://us.api.battle.net/wow/realm/status',
-            type: 'get',
-            dataType: 'json',
-            data: {
-                locale: this.locale,
-                apikey: this.key
-            },
-            success: onRequestSuccess,
-            error: onRequestError
-        });
-    }
-    return localStorage.getObject('realms')
+    var onRequestError = function (xhr, status, error) {
+        console.log('something went brong ' + error);
+    };
+
+    $.ajax({
+        url: 'https://us.api.battle.net/wow/realm/status',
+        type: 'get',
+        dataType: 'json',
+        data: {
+            locale: this.locale,
+            apikey: this.key
+        },
+        success: success,
+        error: onRequestError
+    });
+};
+CharacterApi.prototype.getCharacterInfo = function (success) {
+
+};
+CharacterApi.prototype.getCharacterProfile = function (success, name, realm) {
+
+    var onRequestError = function (xhr, status, error) {
+        console.log('something went brong ' + error);
+    };
+
+    $.ajax({
+        url: 'https://us.api.battle.net/wow/character/' + (realm || this.realm) + '/' + (name || this.name),
+        type: 'get',
+        dataType: 'json',
+        data: {
+            locale: this.locale,
+            apikey: this.key,
+            fields: ''//create a data set with the relevant items
+        },
+        success: success,
+        error: onRequestError
+    });
+
+};
+CharacterApi.prototype.getItems = function () {
+
+};
+CharacterApi.prototype.getPvp = function () {
+
+};
+CharacterApi.prototype.getStats = function () {
+
 };
 
 module.exports = new CharacterApi();
