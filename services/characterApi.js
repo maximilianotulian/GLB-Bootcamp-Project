@@ -56,14 +56,59 @@ CharacterApi.prototype.getCharacterProfile = function (success, name, realm) {
     });
 
 };
-CharacterApi.prototype.getItems = function () {
+CharacterApi.prototype.getItems = function (success, name, realm) {
+    var onRequestError = function (xhr, status, error) {
+        console.log('something went brong ' + error);
+    };
 
+    $.ajax({
+        url: 'https://us.api.battle.net/wow/character/' + (realm || this.realm) + '/' + (name || this.name),
+        type: 'get',
+        dataType: 'json',
+        data: {
+            locale: this.locale,
+            apikey: this.key,
+            fields: 'items'
+        },
+        success: onRequestSuccess,
+        error: onRequestError
+    });
 };
-CharacterApi.prototype.getPvp = function () {
+CharacterApi.prototype.getPvp = function (success, name, realm) {
+    var onRequestError = function (xhr, status, error) {
+        console.log('something went brong ' + error);
+    };
 
+    $.ajax({
+        url: 'https://us.api.battle.net/wow/character/' + (realm || this.realm) + '/' + (name || this.name),
+        type: 'get',
+        dataType: 'json',
+        data: {
+            locale: this.locale,
+            apikey: this.key,
+            fields: 'pvp'
+        },
+        success: onRequestSuccess,
+        error: onRequestError
+    });
 };
-CharacterApi.prototype.getStats = function () {
+CharacterApi.prototype.getStats = function (success, name, realm) {
+    var onRequestError = function (xhr, status, error) {
+        console.log('something went brong ' + error);
+    };
 
+    $.ajax({
+        url: 'https://us.api.battle.net/wow/character/' + (realm || this.realm) + '/' + (name || this.name),
+        type: 'get',
+        dataType: 'json',
+        data: {
+            locale: this.locale,
+            apikey: this.key,
+            fields: 'stats'
+        },
+        success: onRequestSuccess,
+        error: onRequestError
+    });
 };
 
 module.exports = new CharacterApi();
