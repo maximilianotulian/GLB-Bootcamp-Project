@@ -3,16 +3,9 @@ var React = require('react');
 var classNames = require('classnames');
 
 // COMPONENTS
-var Row = require('row');
+var Row = require('../components/row');
 
 var Table = React.createClass({
-
-    propTypes: {
-        filter: React.PropTypes.shape({
-            filterText: React.PropTypes.string
-        }),
-        realms: React.PropTypes.array
-    },
 
     render: function () {
         return (
@@ -24,23 +17,20 @@ var Table = React.createClass({
     },
 
     renderHead: function () {
-       /* <thead>
-        <tr>
-            <th>Title</th>
-            <th>Genre</th>
-            <th>Rating</th>
-            <th>Delete</th>
-            <th>Edit</th>
-        </tr>
-        </thead>  */
+        return (
+            <thead>
+            <tr>
+                <th>Status</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Population</th>
+            </tr>
+            </thead>
+        );
     },
 
     renderBody: function () {
-        /*
-         <tbody>
-            {this.getFilteredRealms().map(this.renderRealm)}
-         </tbody>
-         */
+
     },
 
     renderRealm: function () {
@@ -48,13 +38,7 @@ var Table = React.createClass({
     },
 
     getFilteredData: function () {
-        var filter = this.props.filter;
 
-        var filteredData = _.filter(this.props.realms, function (realm) {
-            var containsFilterText = (realm.name.toUpperCase().indexOf(filter.filterText.toUpperCase()) !== -1);
-
-            return containsFilterText;
-        });
     },
 
     getProps: function () {

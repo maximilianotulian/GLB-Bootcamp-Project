@@ -10,19 +10,13 @@ var FooterView = require('./footer-view');
 // COMPONENTS
 var RouteHandler = Router.RouteHandler;
 
-//SERVICES
-var characterApi = require('../services/character-api');
-
 var MainView = React.createClass({
 
     render: function () {
 
-        //characterApi.getRealmStatus();
-
         return (
             <div {...this.getProps()}>
                 <div className="row">
-
                     <HeaderView />
                 </div>
                 <div className="row">

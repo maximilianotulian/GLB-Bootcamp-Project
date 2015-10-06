@@ -3,13 +3,18 @@ var $ = require('jquery');
 var localStorage = require('./localStorage');
 var _ = require('lodash');
 
-var CharacterApi = function (key, locale) {
-    this.key = key || '7bfpgbdmryu2vcrcxyf8f7psyjv86a6n';
-    this.locale = locale || 'en_US';
+var CharacterApi = function () {
+    this.key = '7bfpgbdmryu2vcrcxyf8f7psyjv86a6n';
+    this.locale = 'en_US';
 };
 
+CharacterApi.prototype.get = function (attr) {
+    return this[attr];
+};
+CharacterApi.prototype.set = function (attr, value) {
+    this[attr] = value;
+};
 CharacterApi.prototype.getRealmStatus = function () {
-
     if (!localStorage.getObject('realms')) {
         var onRequestSuccess = function (result) {
             localStorage.setObject('realms', result.realms);

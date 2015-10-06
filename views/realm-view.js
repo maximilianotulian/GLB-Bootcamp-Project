@@ -1,12 +1,22 @@
+// LIBS
 var React = require('react');
 
+// SERVICES
+var characterApi = require('../services/characterApi');
+
 var RealmView = React.createClass({
+
     render: function () {
-        return(
+
+        return (
             <div>
-                Realm
+
             </div>
         )
+    },
+
+    getTableProps: function () {
+
     }
 });
 
