@@ -1,4 +1,4 @@
-React = require('react');
+var React = require('react');
 
 var RealmView = React.createClass({
     render: function () {

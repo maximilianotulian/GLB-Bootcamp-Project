@@ -1,4 +1,4 @@
-React = require('react');
+var React = require('react');
 
 var FooterView = React.createClass({
     render: function () {

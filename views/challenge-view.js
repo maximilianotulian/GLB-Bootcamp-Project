@@ -1,4 +1,4 @@
-React = require('react');
+var React = require('react');
 
 var ChallengeView = React.createClass({
     render: function () {

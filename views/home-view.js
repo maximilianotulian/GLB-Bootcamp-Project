@@ -1,4 +1,4 @@
-React = require('react');
+var React = require('react');
 
 var HomeView = React.createClass({
     render: function () {
