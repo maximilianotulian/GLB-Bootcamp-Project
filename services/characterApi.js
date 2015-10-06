@@ -70,7 +70,7 @@ CharacterApi.prototype.getItems = function (success, name, realm) {
             apikey: this.key,
             fields: 'items'
         },
-        success: onRequestSuccess,
+        success: success,
         error: onRequestError
     });
 };
@@ -88,7 +88,7 @@ CharacterApi.prototype.getPvp = function (success, name, realm) {
             apikey: this.key,
             fields: 'pvp'
         },
-        success: onRequestSuccess,
+        success: success,
         error: onRequestError
     });
 };
@@ -106,7 +106,24 @@ CharacterApi.prototype.getStats = function (success, name, realm) {
             apikey: this.key,
             fields: 'stats'
         },
-        success: onRequestSuccess,
+        success: success,
+        error: onRequestError
+    });
+};
+CharacterApi.prototype.getChallengeRealm = function (success, realm) {
+    var onRequestError = function (xhr, status, error) {
+        console.log('something went brong ' + error);
+    };
+
+    $.ajax({
+        url: 'https://us.api.battle.net/wow/challenge/' + (realm || this.realm),
+        type: 'get',
+        dataType: 'json',
+        data: {
+            locale: this.locale,
+            apikey: this.key
+        },
+        success: success,
         error: onRequestError
     });
 };
