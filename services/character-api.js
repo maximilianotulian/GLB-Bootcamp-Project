@@ -72,11 +72,9 @@ CharacterApi.prototype.getRealmStatus = function (success) {
             locale: this.locale,
             apikey: this.key
         },
-
         success: function (result) {
             success(filterRealmInfo(result));
         },
-
         error: onRequestError
     });
 };
@@ -93,11 +91,9 @@ CharacterApi.prototype.getCharacterInfo = function (success, name, realm) {
             apikey: this.key,
             fields: 'items pvp stats'
         },
-
         success: function (result) {
             success(filterCharacterInfo(result));
         },
-
         error: onRequestError
     });
 };
@@ -113,11 +109,9 @@ CharacterApi.prototype.getChallengeRealm = function (success, realm) {
             locale: this.locale,
             apikey: this.key
         },
-
         success: function (result) {
             success(filterChallengeInfo(result));
         },
-
         error: onRequestError
     });
 };
@@ -133,11 +127,9 @@ CharacterApi.prototype.getLeaderBoards = function (success, bracket) {
             locale: this.locale,
             apikey: this.key
         },
-
         success: function (result) {
             success(filterLeaderBoardsInfo(result))
         },
-
         error: onRequestError
     });
 };
@@ -154,11 +146,9 @@ CharacterApi.prototype.getGuildProfile = function (success, realm, guildName) {
             apikey: this.key,
             fields: 'members'
         },
-
         success: function (result) {
             success(filterGuildInfo(result));
         },
-
         error: onRequestError
     });
 };

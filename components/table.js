@@ -1,6 +1,7 @@
 // LIBS
 var React = require('react');
 var classNames = require('classnames');
+var _ = require('lodash');
 
 // COMPONENTS
 var Row = require('../components/row');
@@ -10,31 +11,49 @@ var Table = React.createClass({
     render: function () {
         return (
             <table {...this.getProps()}>
-                {this.renderHead()}
-                {this.renderBody()}
+                {this.renderTHead()}
+                {this.renderTBody()}
             </table>
         );
     },
 
-    renderHead: function () {
+    renderTHead: function () {
         return (
             <thead>
-            <tr>
-                <th>Status</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Population</th>
-            </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Type</th>
+                    <th>Population</th>
+                </tr>
             </thead>
         );
     },
 
-    renderBody: function () {
+    renderTBody: function () {
+        var rows = [];
+        var realms = this.props.realms;
 
-    },
+        if (!_.isUndefined(realms)) {
+            var indexRealm = 0;
 
-    renderRealm: function () {
+            for (indexRealm; indexRealm < realms.length; indexRealm += 1 ) {
+                rows.push(
+                    <tr key={realms[indexRealm].name}>
+                        <td>{realms[indexRealm].name}</td>
+                        <td>{realms[indexRealm].status.toString()}</td>
+                        <td>{realms[indexRealm].type}</td>
+                        <td>{realms[indexRealm].population}</td>
+                    </tr>
+                );
+            };
+        }
 
+        return (
+            <tbody>
+                {rows}
+            </tbody>
+        )
     },
 
     getFilteredData: function () {
