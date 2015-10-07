@@ -3,12 +3,12 @@ var $ = require('jquery');
 var _ = require('lodash');
 
 var CharacterApi = function () {
+    this.bracket = '2v2';
+    this.guildName = 'Champions of Tyrium';
     this.key = '7bfpgbdmryu2vcrcxyf8f7psyjv86a6n';
     this.locale = 'en_US';
-    this.realm = 'Ragnaros';
     this.name = 'DarkViciuz';
-    this.bracket = '2v2';
-    this.guildName = 'test';
+    this.realm = 'Ragnaros';
 };
 
 CharacterApi.prototype.get = function (attr) {
@@ -18,7 +18,7 @@ CharacterApi.prototype.set = function (attr, value) {
     this[attr] = value;
 };
 
-//REQUERIMENT 1
+// REQUIREMENT 1
 CharacterApi.prototype.getRealmStatus = function (success) {
 
     var onRequestError = function (xhr, status, error) {
@@ -38,9 +38,24 @@ CharacterApi.prototype.getRealmStatus = function (success) {
     });
 };
 
-//REQUERIMENT 2
-CharacterApi.prototype.getCharacterInfo = function (success) {
+// REQUIREMENT 2
+CharacterApi.prototype.getCharacterInfo = function (success, name, realm) {
+    var onRequestError = function (xhr, status, error) {
+        console.log('something went brong ' + error);
+    };
 
+    $.ajax({
+        url: 'https://us.api.battle.net/wow/character/' + (realm || this.realm) + '/' + (name || this.name),
+        type: 'get',
+        dataType: 'json',
+        data: {
+            locale: this.locale,
+            apikey: this.key,
+            fields: 'items pvp stats'
+        },
+        success: success,
+        error: onRequestError
+    });
 };
 CharacterApi.prototype.getCharacterProfile = function (success, name, realm) {
 
@@ -54,8 +69,7 @@ CharacterApi.prototype.getCharacterProfile = function (success, name, realm) {
         dataType: 'json',
         data: {
             locale: this.locale,
-            apikey: this.key,
-            fields: ''//create a data set with the relevant items
+            apikey: this.key
         },
         success: success,
         error: onRequestError
@@ -117,7 +131,7 @@ CharacterApi.prototype.getStats = function (success, name, realm) {
     });
 };
 
-//REQUERIMENT 3
+// REQUIREMENT 3
 CharacterApi.prototype.getChallengeRealm = function (success, realm) {
     var onRequestError = function (xhr, status, error) {
         console.log('something went brong ' + error);
@@ -136,13 +150,10 @@ CharacterApi.prototype.getChallengeRealm = function (success, realm) {
     });
 };
 
-//REQUERIMENT 4
+// REQUIREMENT 4
 CharacterApi.prototype.getLeaderBoards = function (success, bracket) {
     var onRequestError = function (xhr, status, error) {
         console.log('something went brong ' + error);
-    };
-    var onRequestSuccess = function (request) {
-        console.log(request);
     };
 
     $.ajax({
@@ -153,38 +164,15 @@ CharacterApi.prototype.getLeaderBoards = function (success, bracket) {
             locale: this.locale,
             apikey: this.key
         },
-        success: onRequestSuccess,
+        success: success,
         error: onRequestError
     });
 };
 
-//REQUERIMENT 5
+// REQUIREMENT 5
 CharacterApi.prototype.getGuildProfile = function (success, realm, guildName) {
     var onRequestError = function (xhr, status, error) {
         console.log('something went brong ' + error);
-    };
-    var onRequestSuccess = function (request) {
-        console.log(request);
-    };
-
-    $.ajax({
-        url: 'https://us.api.battle.net/wow/guild/' + (realm|| this.realm) + '/' + (guildName || this.guildName) ,
-        type: 'get',
-        dataType: 'json',
-        data: {
-            locale: this.locale,
-            apikey: this.key
-        },
-        success: onRequestSuccess,
-        error: onRequestError
-    });
-};
-CharacterApi.prototype.getGuildMembers = function (success, realm, guildName) {
-    var onRequestError = function (xhr, status, error) {
-        console.log('something went brong ' + error);
-    };
-    var onRequestSuccess = function (request) {
-        console.log(request);
     };
 
     $.ajax({
@@ -194,9 +182,27 @@ CharacterApi.prototype.getGuildMembers = function (success, realm, guildName) {
         data: {
             locale: this.locale,
             apikey: this.key,
-            fields: members
+            fields: 'members'
         },
-        success: onRequestSuccess,
+        success: success,
+        error: onRequestError
+    });
+};
+CharacterApi.prototype.getGuildMembers = function (success, realm, guildName) {
+    var onRequestError = function (xhr, status, error) {
+        console.log('something went brong ' + error);
+    };
+
+    $.ajax({
+        url: 'https://us.api.battle.net/wow/guild/' + (realm|| this.realm) + '/' + (guildName || this.guildName) ,
+        type: 'get',
+        dataType: 'json',
+        data: {
+            locale: this.locale,
+            apikey: this.key,
+            fields: 'members'
+        },
+        success: success,
         error: onRequestError
     });
 };

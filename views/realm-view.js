@@ -5,9 +5,7 @@ var React = require('react');
 var characterApi = require('../services/characterApi');
 
 var RealmView = React.createClass({
-
     render: function () {
-        characterApi..getLeaderBoards();
         return (
             <div>
 
