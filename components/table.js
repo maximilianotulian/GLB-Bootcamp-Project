@@ -66,7 +66,7 @@ var Table = React.createClass({
     renderLoading: function () {
         return (
             <tr key="0">
-                <td>Loading...</td>
+                <td {...this.getLoadingProps()}>Loading...</td>
             </tr>
         );
     },
@@ -88,9 +88,19 @@ var Table = React.createClass({
         };
     },
 
+    getLoadingProps: function () {
+        var props = this.props;
+
+        return {
+            colSpan: props.rows.length,
+            classNames: 'td-align-center'
+        }
+    },
+
     getClass: function () {
         var classes = {
-            'table': true
+            'table': true,
+            'realm-view': true
         };
 
         return classNames(classes);
