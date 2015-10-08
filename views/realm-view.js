@@ -25,9 +25,9 @@ var RealmView = React.createClass({
     },
 
     getTableProps: function () {
-        return{
-            headers: ['name' + 'status' + 'type' + 'population'],
-            realms: this.state.realms
+        return {
+            rows: ['name', 'status', 'type', 'population'],
+            rowsContent: this.state.realms
         }
     },
 

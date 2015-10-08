@@ -10,76 +10,82 @@ var $ = require('jquery');
 var Table = React.createClass({
 
     propTypes: {
-        headers: React.PropTypes.array,
-        realms: React.PropTypes.shape({
-            name: React.PropTypes.string,
-            status: React.PropTypes.bool,
-            type: React.PropTypes.string,
-            population: React.PropTypes.string
-        })
+        rows: React.PropTypes.array,
+        rowsContent: React.PropTypes.array
     },
 
     render: function () {
         return (
-            <table {...this.getProps()}>
-                {this.renderTHead()}
-                {this.renderTBody()}
+            <table {...this.getTableProps()}>
+                {this.renderTableHeaders()}
+                {this.renderTableBody()}
             </table>
-        )
-    },
-
-    renderTHead: function () {
-        var headers = this.props.headers;
-        var ths = [];
-
-        if (!_.isUndefined(headers)) {
-            _.each(headers, function (value, index) {
-                ths.push(<th className="capitalize" key={index}> {value} </th>);
-            });
-        }
-        return (
-            <thead>
-            {ths}
-            </thead>
         );
     },
 
-    renderTBody: function () {
-        var rows = [];
-        var realms = this.props.realms;
+    renderTableHeaders: function () {
+        var headers = this.props.rows || [];
+        var content = headers.map(this.renderTableHeader);
 
-        if (!_.isUndefined(realms) && realms.length > 0) {
-            var indexRealm = 0;
-
-            for (indexRealm; indexRealm < realms.length; indexRealm += 1) {
-                rows.push(
-                    <tr key={realms[indexRealm].name}>
-                        <td>{realms[indexRealm].name}</td>
-                        <td>{realms[indexRealm].status.toString()}</td>
-                        <td>{realms[indexRealm].type}</td>
-                        <td>{realms[indexRealm].population}</td>
-                    </tr>
-                );
-            }
-        } else {
-            rows.push(<tr key="loading"><td>loading...</td></tr>);
+        if (content.length === 0) {
+            content = this.renderLoading();
         }
+        ;
 
+        return <thead>{content}</thead>;
+    },
+
+    renderTableHeader: function (head, index) {
+        return <th {...this.getTableHeaderProps(index)}>{head}</th>;
+    },
+
+    renderTableBody: function () {
+        var rowsContent = this.props.rowsContent || [];
+        var content = rowsContent.map(this.renderTableRow);
+
+        if (content.length === 0) {
+            content = this.renderLoading();
+        };
+
+        return <tbody>{content}</tbody>;
+    },
+
+    renderTableRow: function (row, index) {
+        var rows = this.props.rows || [];
+        var content = rows.map(this.renderTableCell.bind(this, row));
+
+        return <tr key={index}>{content}</tr>;
+    },
+
+    renderTableCell: function (row, header, index) {
+        var content = row[header] === true ? row[header].toString() : row[header];
+
+        return <td key={index}> {content} </td>;
+    },
+
+    renderLoading: function () {
         return (
-            <tbody>
-            { rows }
-            </tbody>
-        )
+            <tr key="0">
+                <td>Loading...</td>
+            </tr>
+        );
     },
 
     getFilteredData: function () {
 
     },
 
-    getProps: function () {
+    getTableProps: function () {
         return {
             className: this.getClass()
-        }
+        };
+    },
+
+    getTableHeaderProps: function (index) {
+        return {
+            className: 'capitalize',
+            key: index
+        };
     },
 
     getClass: function () {
@@ -89,6 +95,7 @@ var Table = React.createClass({
 
         return classNames(classes);
     }
+
 });
 
 module.exports = Table;

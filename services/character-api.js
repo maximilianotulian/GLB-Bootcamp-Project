@@ -9,6 +9,17 @@ var onRequestError = function (xhr, status, error) {
 
 // FILTER INFORMATION
 var filterRealmInfo = function (result) {
+    var indexRealm = 0;
+    var response = [];
+
+    /*_.each(result, function(realm) {
+        response.push({
+            name: realm.name,
+            status: realm.status,
+            type: realm.type,
+            population: realm.population
+        })
+    });*/
     return result;
 };
 var filterItemsInfo = function () {
