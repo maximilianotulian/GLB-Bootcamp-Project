@@ -7,13 +7,21 @@ var characterApi = require('../services/character-api');
 
 // COMPONENTS
 var Table = require('../components/table');
+var Input = require('../components/input');
+var Button = require('../components/button');
 
 var CharacterView = React.createClass({
 
     render: function () {
         return (
             <div>
-                Character
+                <section>
+                    <Input />
+                    <Button> Find </Button>
+                </section>
+                <section>
+                    <Table />
+                </section>
             </div>
         )
     }

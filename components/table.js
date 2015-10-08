@@ -45,7 +45,8 @@ var Table = React.createClass({
 
         if (content.length === 0) {
             content = this.renderLoading();
-        };
+        }
+        ;
 
         return <tbody>{content}</tbody>;
     },
@@ -90,17 +91,23 @@ var Table = React.createClass({
 
     getLoadingProps: function () {
         var props = this.props;
+        var length;
+
+        if (_.isUndefined(props.length)) {
+            length = 1;
+        } else {
+            length = props.length;
+        };
 
         return {
-            colSpan: props.rows.length,
+            colSpan: length,
             classNames: 'td-align-center'
         }
     },
 
     getClass: function () {
         var classes = {
-            'table': true,
-            'realm-view': true
+            'table': true
         };
 
         return classNames(classes);
