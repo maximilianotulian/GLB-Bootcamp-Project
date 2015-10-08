@@ -9,10 +9,10 @@ var onRequestError = function (xhr, status, error) {
 
 // FILTER INFORMATION
 var filterRealmInfo = function (result) {
-    var indexRealm = 0;
+    /*var indexRealm = 0;
     var response = [];
 
-    /*_.each(result, function(realm) {
+    _.each(result, function(realm) {
         response.push({
             name: realm.name,
             status: realm.status,
@@ -29,21 +29,32 @@ var filterPvpInfo = function (result) {
     return result;
 };
 var filterStatsInfo = function (result) {
-    return result;
+    return [{
+        attack: result.attackPower,
+        agility: result.agi,
+        health: result.health,
+        intelligence: result.int,
+        stamina: result.sta,
+        strength: result.str,
+        mana: result.power,
+        spell: result.spellPower,
+    }]
 };
 var filterCharacterInfo = function (result) {
 
     return {
-        achievementPoints: result.achievementPoints,
-        class: result.class,
-        gender: result.gender,
+        info: [{
+            achievementPoints: result.achievementPoints,
+            class: result.class,
+            gender: result.gender,
+            name: result.name,
+            race: result.race,
+            level: result.level,
+            thumbnail: result.thumbnail
+        }],
         items: filterItemsInfo(result.items),
-        name: result.name,
         pvp: filterPvpInfo(result.pvp),
-        race: result.race,
-        level: result.level,
-        stats: filterStatsInfo(result.stats),
-        thumbnail: result.thumbnail
+        stats: filterStatsInfo(result.stats)
     };
 };
 var filterChallengeInfo = function (result) {

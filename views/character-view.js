@@ -15,7 +15,7 @@ var CharacterView = React.createClass({
     getInitialState: function () {
 
         return {
-            characterInfo: [],
+            data: [],
             name: '',
             realm: ''
         }
@@ -29,10 +29,34 @@ var CharacterView = React.createClass({
                     <Button {...this.getButtonProps()}> Find </Button>
                 </section>
                 <section>
-                    <Table {...this.getTableProps()}/>
+                    {this.renderInfo()}
+                    {this.renderStats()}
+                    {this.renderPvp()}
+                    {this.renderItems()}
+
                 </section>
             </div>
         )
+    },
+
+    renderInfo: function () {
+        return (
+            <Table {...this.getTableInfoProps()} />
+        )
+    },
+
+    renderStats: function () {
+        return (
+            <Table {...this.getTableStatsProps()} />
+        )
+    },
+
+    renderPvp: function () {
+
+    },
+
+    renderItems: function () {
+
     },
 
     getButtonProps: function () {
@@ -48,8 +72,18 @@ var CharacterView = React.createClass({
         }
     },
 
-    getTableProps: function () {
+    getTableInfoProps: function () {
+        return {
+            rows: ['name','achievementPoints', 'class', 'gender', 'level', 'race', 'thumbnail'],
+            rowsContent: this.state.data.info
+        }
+    },
 
+    getTableStatsProps: function () {
+        return {
+            rows: ['attack','agility', 'health', 'intelligence', 'stamina', 'strength', 'mana', 'spell'],
+            rowsContent: this.state.data.stats
+        }
     },
 
     handleInputChange: function (event) {
@@ -62,7 +96,8 @@ var CharacterView = React.createClass({
     },
 
     updateState: function (result) {
-        this.setState({characterInfo: result});
+        console.log(result);
+        this.setState({data: result});
     }
 });
 

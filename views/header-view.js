@@ -38,8 +38,8 @@ var HeaderView = React.createClass({
 
     getClass: function () {
         var classes = {
-            'header-view': true,
-            'style-type': true
+            'nav': true,
+            'navbar-nav': true,
         };
 
         return classNames(classes);

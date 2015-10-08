@@ -11,7 +11,10 @@ var Table = React.createClass({
 
     propTypes: {
         rows: React.PropTypes.array,
-        rowsContent: React.PropTypes.array
+        rowsContent: React.PropTypes.oneOfType (
+            React.PropTypes.array,
+            React.PropTypes.object
+        )
     },
 
     render: function () {
@@ -45,8 +48,7 @@ var Table = React.createClass({
 
         if (content.length === 0) {
             content = this.renderLoading();
-        }
-        ;
+        };
 
         return <tbody>{content}</tbody>;
     },
@@ -107,7 +109,8 @@ var Table = React.createClass({
 
     getClass: function () {
         var classes = {
-            'table': true
+            'table': true,
+            'bg-principal': true
         };
 
         return classNames(classes);
