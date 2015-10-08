@@ -23,7 +23,7 @@ var CharacterView = React.createClass({
 
     render: function () {
         return (
-            <div>
+            <div >
                 <section>
                     <Input {...this.getInputProps()}/>
                     <Button {...this.getButtonProps()}> Find </Button>
@@ -74,15 +74,13 @@ var CharacterView = React.createClass({
 
     getTableInfoProps: function () {
         return {
-            rows: ['name','achievementPoints', 'class', 'gender', 'level', 'race', 'thumbnail'],
-            rowsContent: this.state.data.info
+
         }
     },
 
     getTableStatsProps: function () {
         return {
-            rows: ['attack','agility', 'health', 'intelligence', 'stamina', 'strength', 'mana', 'spell'],
-            rowsContent: this.state.data.stats
+
         }
     },
 

@@ -5,3 +5,30 @@
 .td-align-center {
   align: center;
 }
+
+.custom-table {
+    margin-bottom: 0;
+    border-color: #edf1f2;
+    border-top: 1px solid #dee5e7;
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    &--head {
+        text-transform: capitalize;
+        vertical-align: middle;
+        border-color: inherit;
+        color: white;
+    }
+
+    &--cell {
+        border-top: 0;
+        padding: 8px;
+        border-bottom: 1px solid #eaeff0;
+    }
+
+    &--inverted-row {
+        background-color: sandybrown;
+    }
+}

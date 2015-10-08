@@ -33,9 +33,8 @@ var Table = React.createClass({
         if (content.length === 0) {
             content = this.renderLoading();
         }
-        ;
 
-        return <thead>{content}</thead>;
+        return <thead><tr className="custom-table--head">{content}</tr></thead>;
     },
 
     renderTableHeader: function (head, index) {
@@ -48,7 +47,7 @@ var Table = React.createClass({
 
         if (content.length === 0) {
             content = this.renderLoading();
-        };
+        }
 
         return <tbody>{content}</tbody>;
     },
@@ -57,13 +56,13 @@ var Table = React.createClass({
         var rows = this.props.rows || [];
         var content = rows.map(this.renderTableCell.bind(this, row));
 
-        return <tr key={index}>{content}</tr>;
+        return <tr key={index} {...this.getTableRowProps(index)}>{content}</tr>;
     },
 
     renderTableCell: function (row, header, index) {
         var content = row[header] === true ? row[header].toString() : row[header];
 
-        return <td key={index}> {content} </td>;
+        return <td key={index} className="custom-table--cell" > {content} </td>;
     },
 
     renderLoading: function () {
@@ -72,6 +71,20 @@ var Table = React.createClass({
                 <td {...this.getLoadingProps()}>Loading...</td>
             </tr>
         );
+    },
+
+    getTableRowProps: function (index) {
+        return {
+            className: this.getTableRowClass(index)
+        };
+    },
+
+    getTableRowClass: function (index) {
+        var classes = {
+            'custom-table--inverted-row': ((index % 2) === 0)
+        };
+
+        return classNames(classes);
     },
 
     getFilteredData: function () {
@@ -86,7 +99,7 @@ var Table = React.createClass({
 
     getTableHeaderProps: function (index) {
         return {
-            className: 'capitalize',
+            className: 'custom-table--cell',
             key: index
         };
     },
@@ -99,7 +112,7 @@ var Table = React.createClass({
             length = 1;
         } else {
             length = props.length;
-        };
+        }
 
         return {
             colSpan: length,
@@ -109,8 +122,7 @@ var Table = React.createClass({
 
     getClass: function () {
         var classes = {
-            'table': true,
-            'bg-principal': true
+            'custom-table': true
         };
 
         return classNames(classes);
