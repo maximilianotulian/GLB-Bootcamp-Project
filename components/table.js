@@ -20,7 +20,12 @@ var Table = React.createClass({
     },
 
     render: function () {
-        return this.renderTable();
+        return (
+            <table {...this.getProps()}>
+                {this.renderTHead()}
+                {this.renderTBody()}
+            </table>
+        )
     },
 
     renderTHead: function () {
@@ -57,22 +62,13 @@ var Table = React.createClass({
                 );
             }
         } else {
-            rows.push(<tr><td>loading...</td></tr>);
+            rows.push(<tr key="loading"><td>loading...</td></tr>);
         }
 
         return (
             <tbody>
             { rows }
             </tbody>
-        )
-    },
-
-    renderTable: function () {
-        return (
-            <table {...this.getProps()}>
-                {this.renderTHead()}
-                {this.renderTBody()}
-            </table>
         )
     },
 
