@@ -5,27 +5,36 @@ var _ = require('lodash');
 
 // COMPONENTS
 var Row = require('../components/row');
+var $ = require('jquery');
 
 var Table = React.createClass({
 
+    propTypes: {
+        headers: React.PropTypes.array,
+        realms: React.PropTypes.shape({
+            name: React.PropTypes.string,
+            status: React.PropTypes.bool,
+            type: React.PropTypes.string,
+            population: React.PropTypes.string
+        })
+    },
+
     render: function () {
-        return (
-            <table {...this.getProps()}>
-                {this.renderTHead()}
-                {this.renderTBody()}
-            </table>
-        );
+        return this.renderTable();
     },
 
     renderTHead: function () {
+        var headers = this.props.headers;
+        var ths = [];
+
+        if (!_.isUndefined(headers)) {
+            _.each(headers, function (value, index) {
+                ths.push(<th className="capitalize" key={index}> {value} </th>);
+            });
+        }
         return (
             <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Type</th>
-                    <th>Population</th>
-                </tr>
+            {ths}
             </thead>
         );
     },
@@ -34,10 +43,10 @@ var Table = React.createClass({
         var rows = [];
         var realms = this.props.realms;
 
-        if (!_.isUndefined(realms)) {
+        if (!_.isUndefined(realms) && realms.length > 0) {
             var indexRealm = 0;
 
-            for (indexRealm; indexRealm < realms.length; indexRealm += 1 ) {
+            for (indexRealm; indexRealm < realms.length; indexRealm += 1) {
                 rows.push(
                     <tr key={realms[indexRealm].name}>
                         <td>{realms[indexRealm].name}</td>
@@ -46,13 +55,24 @@ var Table = React.createClass({
                         <td>{realms[indexRealm].population}</td>
                     </tr>
                 );
-            };
+            }
+        } else {
+            rows.push(<tr><td>loading...</td></tr>);
         }
 
         return (
             <tbody>
-                {rows}
+            { rows }
             </tbody>
+        )
+    },
+
+    renderTable: function () {
+        return (
+            <table {...this.getProps()}>
+                {this.renderTHead()}
+                {this.renderTBody()}
+            </table>
         )
     },
 
