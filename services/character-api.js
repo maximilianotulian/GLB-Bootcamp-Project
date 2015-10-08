@@ -22,14 +22,14 @@ var filterRealmInfo = function (result) {
     });*/
     return result;
 };
-var filterItemsInfo = function () {
-    return '';
+var filterItemsInfo = function (result) {
+    return [result];
 };
-var filterPvpInfo = function () {
-    return '';
+var filterPvpInfo = function (result) {
+    return result;
 };
-var filterStatsInfo = function () {
-    return '';
+var filterStatsInfo = function (result) {
+    return result;
 };
 var filterCharacterInfo = function (result) {
 
@@ -37,12 +37,12 @@ var filterCharacterInfo = function (result) {
         achievementPoints: result.achievementPoints,
         class: result.class,
         gender: result.gender,
-        items: filterItemsInfo(),
+        items: filterItemsInfo(result.items),
         name: result.name,
-        pvp: filterPvpInfo(),
+        pvp: filterPvpInfo(result.pvp),
         race: result.race,
         level: result.level,
-        stats: filterStatsInfo(),
+        stats: filterStatsInfo(result.stats),
         thumbnail: result.thumbnail
     };
 };

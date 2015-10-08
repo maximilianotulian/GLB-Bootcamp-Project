@@ -5,7 +5,6 @@ var _ = require('lodash');
 var Input = React.createClass({
 
     propTypes: {
-        index: React.PropTypes.string,
         onChange: React.PropTypes.func,
         value: React.PropTypes.string
     },
@@ -15,7 +14,6 @@ var Input = React.createClass({
 
         if (_.isUndefined(this.props.value)) {
             initialState.value = '';
-            initialState.index = 0;
         }
 
         return initialState;
@@ -41,7 +39,7 @@ var Input = React.createClass({
     },
 
     handleChange: function (event) {
-        this.props.onChange(event, this.props.index);
+        this.props.onChange(event);
     }
 });
 
