@@ -6,7 +6,8 @@ var Input = React.createClass({
 
     propTypes: {
         onChange: React.PropTypes.func,
-        value: React.PropTypes.string
+        value: React.PropTypes.string,
+        placeholder: React.PropTypes.string
     },
 
     getInitialState: function () {
@@ -31,7 +32,7 @@ var Input = React.createClass({
             className: 'custom-input',
             value: this.getValue(),
             onChange: this.handleChange,
-            placeholder: this.props.placeholder
+            placeholder: this.props.placeholder || this.state.placeholder
         })
     },
 

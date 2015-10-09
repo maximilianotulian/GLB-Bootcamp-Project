@@ -42,7 +42,7 @@ var filterStatsInfo = function (result) {
 };
 var filterCharacterInfo = function (result) {
 
-    return {
+    /*return {
         info: [{
             achievementPoints: result.achievementPoints,
             class: result.class,
@@ -55,7 +55,8 @@ var filterCharacterInfo = function (result) {
         items: filterItemsInfo(result.items),
         pvp: filterPvpInfo(result.pvp),
         stats: filterStatsInfo(result.stats)
-    };
+    };*/
+    return result;
 };
 var filterChallengeInfo = function (result) {
     return result;

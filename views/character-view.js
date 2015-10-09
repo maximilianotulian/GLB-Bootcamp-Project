@@ -9,6 +9,7 @@ var characterApi = require('../services/character-api');
 var Table = require('../components/table');
 var Input = require('../components/input');
 var Button = require('../components/button');
+var CharacterInfo = require('../components/character-info');
 
 var CharacterView = React.createClass({
 
@@ -40,14 +41,12 @@ var CharacterView = React.createClass({
 
     renderInfo: function () {
         return (
-            <Table {...this.getTableInfoProps()} />
+            <CharacterInfo data={this.state.data} />
         )
     },
 
     renderStats: function () {
-        return (
-            <Table {...this.getTableStatsProps()} />
-        )
+        return '';
     },
 
     renderPvp: function () {
@@ -74,15 +73,13 @@ var CharacterView = React.createClass({
 
     getTableInfoProps: function () {
         return {
-            rows: ['name', 'achievementPoints', 'class', 'gender', 'level', 'race', 'thumbnail'],
-            rowsContent: this.state.data.info
+
         }
     },
 
     getTableStatsProps: function () {
         return {
-            rows: ['attack', 'agility', 'health', 'intelligence', 'stamina', 'strength', 'mana', 'spell'],
-            rowsContent: this.state.data.stats
+
         }
     },
 
