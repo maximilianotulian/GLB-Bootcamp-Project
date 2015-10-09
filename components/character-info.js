@@ -6,14 +6,13 @@ var _ = require('lodash');
 var CharacterInfo = React.createClass({
 
     propTypes: {
-        data: React.PropTypes.oneOfType(
-            React.PropTypes.array,
-            React.PropTypes.object
-        )
+        data: React.PropTypes.oneOfType([
+            React.PropTypes.array.isRequired,
+            React.PropTypes.object.isRequired
+        ])
     },
 
     render: function () {
-        var data = this.props.data;
 
         return (
             this.renderCharacterApi()
@@ -21,38 +20,25 @@ var CharacterInfo = React.createClass({
     },
 
     renderCharacterApi: function () {
-        var content;
-        var data = this.props.data || [];
+        var data = this.props.data;
 
-        if (_.isUndefined(data.name)) {
-            console.log('data 0');
-            content = this.renderLoading();
-        } else {
-            console.log('data llena');
-            content =
-                (
-                    <section {...this.getSectionProps()}>
-                        <div className="col-md-2">
-                            <div {...this.getDivProps}>
-                                <img {...this.getImgProps()}/>
-                            </div>
-                            <button{...this.getButtonProps()}> {data.level} </button>
-                        </div>
-                        <div {...this.getDivWrapperProps()}>
-                            <h4> {data.name} </h4>
-
-                            <p> Class: {data.class}</p>
-
-                            <p> Gender: {data.gender}</p>
-
-                            <p> Race: {data.race}</p>
-
-                            <p> Achievement Points: {data.achievementPoints} </p>
-                        </div>
-                    </section>
-                );
-        }
-        return content;
+        return (
+            <section {...this.getSectionProps()}>
+                <div className="col-md-2">
+                    <div {...this.getDivProps}>
+                        <img {...this.getImgProps()}/>
+                    </div>
+                    <button {...this.getButtonProps()}> {data.level}</button>
+                </div>
+                <div {...this.getDivWrapperProps()}>
+                    <h4> {data.name} </h4>
+                    <p> Class: {data.class}</p>
+                    <p> Gender: {data.gender}</p>
+                    <p> Race: {data.race}</p>
+                    <p>Achievement Points: {data.achievementPoints}</p>
+                </div>
+            </section>
+        );
     },
 
     getSectionProps: function () {
@@ -78,14 +64,14 @@ var CharacterInfo = React.createClass({
 
     getDivClass: function () {
         var classes = {
-            'item': true
+            'panel--item': true
         };
 
         return classNames(classes);
     },
 
     getButtonProps: function () {
-        var props = this.props;
+        var data = this.props.data;
 
         return {
             className: this.getButtonClass()
@@ -95,7 +81,7 @@ var CharacterInfo = React.createClass({
     getButtonClass: function () {
         var classes = {
             'col-md-2': true,
-            'button': true
+            'panel--button': true
         };
 
         return classNames(classes);
@@ -110,7 +96,7 @@ var CharacterInfo = React.createClass({
 
     getImgClass: function () {
         var classes = {
-            'image': true
+            'panel--image': true
         };
 
         return classNames(classes);
@@ -129,14 +115,6 @@ var CharacterInfo = React.createClass({
 
         return classNames(classes);
     },
-
-    renderLoading: function () {
-        return (
-            <section>
-                <h3> Ingrese un nombre </h3>
-            </section>
-        )
-    }
 });
 
 module.exports = CharacterInfo;
