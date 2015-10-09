@@ -4,41 +4,72 @@ var classNames = require('classnames');
 var _ = require('lodash');
 
 // COMPONENTS
-var StatGroup = require('./stat-group');
+var UnOrderedList = require('./unordered-list');
 
 var CharacterStats = React.createClass({
+    propStyles: {
+        data: React.PropTypes.object
+    },
 
     render: function () {
         return (
             <div {...this.getProps()}>
-                <StatGroup {...this.getStatProps()}/>
-                <StatGroup {...this.getStatProps()}/>
-                <StatGroup {...this.getStatProps()}/>
+                <UnOrderedList {...this.getUnOrderedListProps('General')}/>
+                <UnOrderedList {...this.getUnOrderedListProps('Atack')}/>
+                <UnOrderedList {...this.getUnOrderedListProps('Other')}/>
             </div>
         )
     },
-
     getProps: function () {
         return {
-            className: this.getClass()
+            className : this.getClass()
         }
     },
 
-    getClass: function () {
+    getClass: function() {
         var classes = {
-            'row': true
+
         };
+        classes[this.props.className] = (this.props.className);
 
         return classNames(classes);
     },
 
-    getStatProps: function () {
+    getUnOrderedListProps: function (title) {
+        var items;
+        var stats = this.props.data;
+        console.log(stats);
+
+        if (title === 'General') {
+            items = {
+                Strength: stats.str,
+                Agility: stats.agi,
+                Intelect: stats.int,
+                Mastery: stats.mastery
+            };
+        } else if (title === 'Atack') {
+            items = {
+                Attack: stats.attackPower,
+                Critical: stats.crit,
+                Dodge: stats.dodge,
+                Haste: stats.haste
+            }
+        } else if (title === 'Other') {
+            items= {
+                Health: stats.health,
+                Mana: stats.pwer,
+                Stamina: stats.sta,
+                'Multi Strike': stats.multistrike
+            }
+        }
         return {
-            className: this.getStatClass()
+            className: this.getUnOrderedListClass(),
+            items: items || [],
+            title: title
         }
     },
 
-    getStatClass: function () {
+    getUnOrderedListClass: function () {
         var classes = {
             'col-md-4': true
         };

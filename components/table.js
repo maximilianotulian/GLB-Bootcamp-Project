@@ -11,10 +11,10 @@ var Table = React.createClass({
 
     propTypes: {
         rows: React.PropTypes.array,
-        rowsContent: React.PropTypes.oneOfType (
+        rowsContent: React.PropTypes.oneOfType ([
             React.PropTypes.array,
             React.PropTypes.object
-        )
+        ])
     },
 
     render: function () {

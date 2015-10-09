@@ -13,7 +13,6 @@ var CharacterInfo = React.createClass({
     },
 
     render: function () {
-
         return (
             this.renderCharacterApi()
         )
@@ -23,7 +22,7 @@ var CharacterInfo = React.createClass({
         var data = this.props.data;
 
         return (
-            <section {...this.getSectionProps()}>
+            <section className="panel-body">
                 <div className="col-md-2">
                     <div {...this.getDivProps}>
                         <img {...this.getImgProps()}/>
@@ -37,23 +36,14 @@ var CharacterInfo = React.createClass({
                     <p> Race: {data.race}</p>
                     <p>Achievement Points: {data.achievementPoints}</p>
                 </div>
+                <div {...this.getDivWrapperProps()}>
+                    <h4> {data.realm} </h4>
+                    <p> Total Honorable Kills: {data.totalHonorableKills}</p>
+                    <p> Average Item Level: {data.items.averageItemLevel}</p>
+                    <p> Average Item Equipped: {data.items.averageItemLevelEquipped}</p>
+                </div>
             </section>
         );
-    },
-
-    getSectionProps: function () {
-        return {
-            className: this.getSectionClass()
-        }
-    },
-
-    getSectionClass: function () {
-        var classes = {
-            'col-md-12': true,
-            'panel': true
-        };
-
-        return classNames(classes);
     },
 
     getDivProps: function () {
@@ -110,7 +100,7 @@ var CharacterInfo = React.createClass({
 
     getDivWrapperClass: function () {
         var classes = {
-            'col-md-8': true
+            'col-md-5': true
         };
 
         return classNames(classes);

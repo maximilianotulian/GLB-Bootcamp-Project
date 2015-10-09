@@ -27,7 +27,7 @@ var CharacterView = React.createClass({
     render: function () {
         return (
             <div >
-                <section >
+                <section>
                     <Input {...this.getInputProps()}/>
                     <Button {...this.getButtonProps()}> Find </Button>
                 </section>
@@ -43,12 +43,14 @@ var CharacterView = React.createClass({
             content = this.renderLoading();
         } else {
             content = (
-                <section >
+                <div className="container">
                     {this.renderMainInfo()}
                     {this.renderStats()}
-                    {this.renderItems()}
-                    {this.renderPvp()}
-                </section>
+                    <div {...this.getDivProps()}>
+                        {this.renderItems()}
+                        {this.renderPvp()}
+                    </div>
+                </div>
             );
         }
         return content;
@@ -64,24 +66,30 @@ var CharacterView = React.createClass({
 
     renderMainInfo: function () {
         return (
-            <CharacterInfo data={this.state.data} />
+            <div {...this.getDivProps()}>
+                <CharacterInfo data={this.state.data}/>
+            </div>
         )
     },
 
     renderStats: function () {
-        console.log(this.state.data.pvp);
-        console.log(this.state.data.items);
         return (
-            <CharacterStats data={this.state.data.stats}/>
+            <div {...this.getDivProps()}>
+                <CharacterStats {...this.getCharacterStatsProps()}/>
+            </div>
         )
     },
 
     renderPvp: function () {
-
+        return (
+            <div className="col-md-6 panel-body"> hola soy el pvp </div>
+        )
     },
 
     renderItems: function () {
-
+        return (
+            <div className="col-md-6 panel-body"> hola soy los items </div>
+        )
     },
 
     getButtonProps: function () {
@@ -98,16 +106,35 @@ var CharacterView = React.createClass({
         }
     },
 
-    getTableInfoProps: function () {
+    getDivProps: function () {
         return {
-
+            className: this.getDivClass()
         }
     },
 
-    getTableStatsProps: function () {
-        return {
+    getDivClass: function () {
+        var classes = {
+            'row': true,
+            'panel': true,
+            'panel-default': true
+        };
 
+        return classNames(classes);
+    },
+
+    getCharacterStatsProps: function () {
+        return {
+            className: this.getCharacterStatsClass(),
+            data: this.state.data.stats
         }
+    },
+
+    getCharacterStatsClass: function () {
+        var classes = {
+
+        };
+
+        return classNames(classes);
     },
 
     handleInputChange: function (event) {
