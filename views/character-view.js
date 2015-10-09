@@ -24,16 +24,15 @@ var CharacterView = React.createClass({
     render: function () {
         return (
             <div >
-                <section>
+                <section {...this.getSectionProps()}>
                     <Input {...this.getInputProps()}/>
                     <Button {...this.getButtonProps()}> Find </Button>
                 </section>
-                <section>
+                <section {...this.getSectionProps()}>
                     {this.renderInfo()}
                     {this.renderStats()}
                     {this.renderPvp()}
                     {this.renderItems()}
-
                 </section>
             </div>
         )
@@ -68,19 +67,22 @@ var CharacterView = React.createClass({
     getInputProps: function () {
         return {
             value: this.state.name,
-            onChange: this.handleInputChange
+            onChange: this.handleInputChange,
+            placeholder: 'Name'
         }
     },
 
     getTableInfoProps: function () {
         return {
-
+            rows: ['name', 'achievementPoints', 'class', 'gender', 'level', 'race', 'thumbnail'],
+            rowsContent: this.state.data.info
         }
     },
 
     getTableStatsProps: function () {
         return {
-
+            rows: ['attack', 'agility', 'health', 'intelligence', 'stamina', 'strength', 'mana', 'spell'],
+            rowsContent: this.state.data.stats
         }
     },
 
@@ -88,6 +90,19 @@ var CharacterView = React.createClass({
         this.setState({name: event.target.value});
     },
 
+    getSectionProps: function () {
+        return {
+            className: this.getSectionClass()
+        }
+    },
+
+    getSectionClass: function () {
+        var classes = {
+
+        };
+
+        return classNames(classes);
+    },
     handleClick: function () {
         characterApi.getCharacterInfo(this.updateState, this.state.name, this.state.realm);
         this.setState({name: ''});

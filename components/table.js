@@ -11,7 +11,7 @@ var Table = React.createClass({
 
     propTypes: {
         rows: React.PropTypes.array,
-        rowsContent: React.PropTypes.oneOfType (
+        rowsContent: React.PropTypes.oneOfType(
             React.PropTypes.array,
             React.PropTypes.object
         )
@@ -34,7 +34,9 @@ var Table = React.createClass({
             content = this.renderLoading();
         }
 
-        return <thead><tr className="custom-table--head">{content}</tr></thead>;
+        return <thead>
+        <tr className="custom-table--head">{content}</tr>
+        </thead>;
     },
 
     renderTableHeader: function (head, index) {
@@ -62,7 +64,7 @@ var Table = React.createClass({
     renderTableCell: function (row, header, index) {
         var content = row[header] === true ? row[header].toString() : row[header];
 
-        return <td key={index} className="custom-table--cell" > {content} </td>;
+        return <td key={index} className="custom-table--cell"> {content} </td>;
     },
 
     renderLoading: function () {

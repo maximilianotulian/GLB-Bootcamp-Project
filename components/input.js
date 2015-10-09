@@ -28,9 +28,10 @@ var Input = React.createClass({
     getProps: function () {
         return ({
             type: 'text',
-            className: 'input',
+            className: 'custom-input',
             value: this.getValue(),
-            onChange: this.handleChange
+            onChange: this.handleChange,
+            placeholder: this.props.placeholder
         })
     },
 

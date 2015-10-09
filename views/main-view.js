@@ -16,13 +16,13 @@ var MainView = React.createClass({
 
         return (
             <div {...this.getProps()}>
-                <div className="row">
+                <div {...this.getDivProps()}>
                     <HeaderView />
                 </div>
-                <div className="row">
+                <div {...this.getDivProps()}>
                     <RouteHandler />
                 </div>
-                <div>
+                <div {...this.getDivProps()}>
                     <FooterView />
                 </div>
             </div>
@@ -39,6 +39,21 @@ var MainView = React.createClass({
         var classes = {
             'main-view': true,
             'container-fluid': true
+        };
+
+        return classNames(classes);
+    },
+
+    getDivProps: function () {
+        return {
+            className: this.getDivClass()
+        }
+    },
+
+    getDivClass: function () {
+        var classes = {
+            'row': true,
+            'custom-section': true
         };
 
         return classNames(classes);

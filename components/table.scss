@@ -1,11 +1,3 @@
-.capitalize {
-  text-transform: capitalize;
-}
-
-.td-align-center {
-  align: center;
-}
-
 .custom-table {
     margin-bottom: 0;
     border-color: #edf1f2;
@@ -14,12 +6,12 @@
     max-width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
+    padding: 15px;
 
     &--head {
         text-transform: capitalize;
         vertical-align: middle;
         border-color: inherit;
-        color: white;
     }
 
     &--cell {
@@ -29,6 +21,6 @@
     }
 
     &--inverted-row {
-        background-color: sandybrown;
+        background-color: lightblue;
     }
 }

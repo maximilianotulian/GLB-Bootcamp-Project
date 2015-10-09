@@ -1,6 +1,7 @@
 //LIBS
 var React = require('react');
 var _ = require('lodash');
+var classNames = require('classnames');
 
 var Button = React.createClass({
 
@@ -16,8 +17,17 @@ var Button = React.createClass({
 
     getProps: function () {
         return {
-            onClick: this.handleClick
+            onClick: this.handleClick,
+            className: this.getClass()
         }
+    },
+
+    getClass: function () {
+        var classes = {
+            'custom-button': true
+        };
+
+        return classNames(classes);
     },
 
     handleClick: function () {
