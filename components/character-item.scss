@@ -1,0 +1,33 @@
+.item {
+
+  &--image {
+    display: block;
+    width: 44px;
+    height: 44px;
+    padding: 3px 0 0 3px;
+  }
+
+  &--span {
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  &--span ~ &--span {
+    display: block;
+    font-weight: normal;
+    font-size: 11px;
+  }
+
+  &--green {
+    color: green;
+  }
+
+  &--blue {
+    color: blue;
+  }
+
+  &--violet {
+    color: blueviolet;
+  }
+
+}

@@ -38,7 +38,6 @@ var CharacterStats = React.createClass({
     getUnOrderedListProps: function (title) {
         var items;
         var stats = this.props.data;
-        console.log(stats);
 
         if (title === 'General') {
             items = {

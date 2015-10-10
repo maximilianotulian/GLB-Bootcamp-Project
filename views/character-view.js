@@ -12,6 +12,8 @@ var Input = require('../components/input');
 var Button = require('../components/button');
 var CharacterInfo = require('../components/character-info');
 var CharacterStats = require('../components/character-stats');
+var CharacterItem = require('../components/character-item');
+var UnOrderedList = require('../components/unordered-list');
 
 var CharacterView = React.createClass({
 
@@ -87,8 +89,44 @@ var CharacterView = React.createClass({
     },
 
     renderItems: function () {
+        var items = this.state.data.items;
+        var filteredItems = {
+            back: items.back,
+            chest: items.chest,
+            feet: items.feet,
+            finger1: items.finger1,
+            finger2: items.finger2,
+            hands: items.hands,
+            head: items.head,
+            legs: items.legs,
+            mainHand: items.mainHand,
+            neck: items.neck,
+            shirt: items.shirt,
+            shoulder: items.shoulder,
+            trinket1: items.trinket1,
+            trinket2: items.trinket2,
+            waist: items.waist,
+            wrist: items.wrist
+        };
+        var listItems = [];
+        var itemIndex = 0;
+
+        _.each(filteredItems, function (item) {
+            listItems.push(
+                <li key={itemIndex} className="list-group-item">
+                    <CharacterItem item={item}/>
+                </li>
+            );
+            itemIndex += 1;
+        });
+
         return (
-            <div className="col-md-6 panel-body"> hola soy los items </div>
+            <div className="col-md-5 panel-body">
+                <h4 className="text-center">Items information</h4>
+                <ul >
+                    {listItems}
+                </ul>
+            </div>
         )
     },
 
@@ -130,9 +168,7 @@ var CharacterView = React.createClass({
     },
 
     getCharacterStatsClass: function () {
-        var classes = {
-
-        };
+        var classes = {};
 
         return classNames(classes);
     },
