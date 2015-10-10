@@ -23,7 +23,8 @@ var CharacterView = React.createClass({
         return {
             data: [],
             name: '',
-            realm: ''
+            realm: '',
+            render: 'initial'
         }
     },
 
@@ -42,29 +43,14 @@ var CharacterView = React.createClass({
     renderContent: function () {
         var content;
 
-        if (_.isUndefined(this.state.data.name)) {
-            content = this.renderLoading();
-        } else {
-            content = (
-                <div className="container">
-                    {this.renderMainInfo()}
-                    {this.renderStats()}
-                    <div {...this.getDivProps()}>
-                        {this.renderItems()}
-                        {this.renderPvp()}
-                    </div>
-                </div>
-            );
+        if (this.state.render === 'initial') {
+            content = this.getInitialContent();
+        } else if (this.state.render === 'loading') {
+            content = this.getLoadingContent();
+        } else if (this.state.render === 'complete') {
+            content = this.getCompleteContent();
         }
         return content;
-    },
-
-    renderLoading: function () {
-        return (
-            <section>
-                <h4> Insert character name and press find to see more information </h4>
-            </section>
-        )
     },
 
     renderMainInfo: function () {
@@ -89,19 +75,6 @@ var CharacterView = React.createClass({
                 <CharacterPvp {...this.getCharacterPvpProps()} />
             </div>
         )
-    },
-
-    getCharacterPvpProps: function () {
-        return {
-            className: this.getCharacterPvpClass(),
-            data: this.state.data.pvp.brackets
-        }
-    },
-
-    getCharacterPvpClass: function () {
-        var classes = {};
-
-        return classNames(classes);
     },
 
     renderItems: function () {
@@ -144,6 +117,48 @@ var CharacterView = React.createClass({
                 </ul>
             </div>
         )
+    },
+
+    getInitialContent: function () {
+        return (
+            <section>
+                <h4> Insert character name and press find to see more information </h4>
+            </section>
+        )
+    },
+
+    getLoadingContent: function () {
+        return (
+            <section>
+                Loading....
+            </section>
+        )
+    },
+
+    getCompleteContent: function () {
+        return (
+            <div className="container">
+                {this.renderMainInfo()}
+                {this.renderStats()}
+                <div {...this.getDivProps()}>
+                    {this.renderItems()}
+                    {this.renderPvp()}
+                </div>
+            </div>
+        );
+    },
+
+    getCharacterPvpProps: function () {
+        return {
+            className: this.getCharacterPvpClass(),
+            data: this.state.data.pvp.brackets
+        }
+    },
+
+    getCharacterPvpClass: function () {
+        var classes = {};
+
+        return classNames(classes);
     },
 
     getButtonProps: function () {
@@ -190,16 +205,26 @@ var CharacterView = React.createClass({
     },
 
     handleInputChange: function (event) {
-        this.setState({ name: event.target.value });
+        this.setState({
+            name: event.target.value,
+            render: 'initial',
+            data: []
+        });
     },
 
     handleClick: function () {
         characterApi.getCharacterInfo(this.updateState, this.state.name, this.state.realm);
-        this.setState({ name: '' });
+        this.setState({
+            name: '' ,
+            render:'loading'
+        });
     },
 
     updateState: function (result) {
-        this.setState({data: result});
+        this.setState({
+            data: result,
+            render: 'complete'
+        });
     }
 });
 
