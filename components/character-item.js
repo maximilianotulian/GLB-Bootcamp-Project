@@ -14,9 +14,9 @@ var CharacterItem = React.createClass({
             <div className="container">
                 <img {...this.getImgProps()} />
                 <div className="col-md-4">
-                    <span className="item--span">{item.name}</span>
-                    <span {...this.getSpanProps(item.itemLevel)}>Item level {item.itemLevel}</span>
-                    <span {...this.getSpanProps(item.itemLevel)}>Armor {item.armor}</span>
+                    <span {...this.getSpanProps(item.itemLevel)}>{item.name}</span>
+                    <span className="item--span">Item level {item.itemLevel}</span>
+                    <span className="item--span">Armor {item.armor}</span>
                 </div>
             </div>
         )
