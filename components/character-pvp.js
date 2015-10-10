@@ -45,7 +45,15 @@ var CharacterPvp = React.createClass({
     },
 
     getUnOrderedListProps: function (title) {
-        console.log(this.props.data);
+
+        return {
+            className: this.getUnOrderedListClass(),
+            items: this.getItems(title),
+            title: title
+        }
+    },
+
+    getItems: function (title) {
         var items;
         var key = [
             'ARENA_BRACKET_2v2',
@@ -55,30 +63,26 @@ var CharacterPvp = React.createClass({
         ];
 
         if (title === '2v2') {
-            items = this.renderBracket(key[0]);
+            items = this.setItemInfo(key[0]);
         } else if (title === '3v3') {
-            items = this.renderBracket(key[1]);
+            items = this.setItemInfo(key[1]);
         } else if (title === '5v5') {
-            items = this.renderBracket(key[2]);
+            items = this.setItemInfo(key[2]);
         } else if (title === 'RBG') {
-            items = this.renderBracket(key[3]);
+            items = this.setItemInfo(key[3]);
         }
 
-        return {
-            className: this.getUnOrderedListClass(),
-            items: items || [],
-            title: title
-        }
+        return items || []
     },
 
-    renderBracket: function (bracket) {
+    setItemInfo: function (key) {
         var stats = this.props.data;
         var items = {
-            Rating: stats[bracket].rating,
-            'Season Lost': stats[bracket].seasonLost,
-            'Season Played': stats[bracket].seasonPlayed,
-            'Weekly Lost': stats[bracket].weeklyLost,
-            'Weekly Played': stats[bracket].weeklyPlayed
+            Rating: stats[key].rating,
+            'Season Lost': stats[key].seasonLost,
+            'Season Played': stats[key].seasonPlayed,
+            'Weekly Lost': stats[key].weeklyLost,
+            'Weekly Played': stats[key].weeklyPlayed
         };
 
         return items
