@@ -82,6 +82,7 @@ var Table = React.createClass({
     },
 
     getTableRowClass: function (index) {
+
         var classes = {
             'custom-table--inverted-row': ((index % 2) === 0)
         };

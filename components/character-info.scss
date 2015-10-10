@@ -45,4 +45,18 @@
     border: 0;
   }
 
+  &--span {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 8px 8px 0;
+  }
+
+  &--span ~ &--span {
+    display: block;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: left;
+  }
+
 }

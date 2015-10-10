@@ -26,7 +26,7 @@ var CharacterItem = React.createClass({
         return {
             className: this.getImgClass(),
             src: this.getUrl(),
-            alt: 'This is an item image'
+            alt: 'This is an item icon image'
         }
     },
 
@@ -50,19 +50,24 @@ var CharacterItem = React.createClass({
         var classes = {
             'item--span': true,
             'item--green': (itemLevel > 350 && itemLevel < 450),
-            'item--blue': (itemLevel > 450 && itemLevel < 675),
-            'item--violet': (itemLevel > 675)
+            'item--blue': (itemLevel > 450 && itemLevel < 660),
+            'item--violet': (itemLevel > 660)
         };
 
         return classNames(classes);
     },
 
     getUrl: function () {
-        var url = "http://media.blizzard.com/wow/icons/56/" + this.props.item.icon + ".jpg";
+        var url;
+
+        if (_.isUndefined(this.props.item.icon)) {
+            url= '';
+        } else {
+            url = "http://media.blizzard.com/wow/icons/56/" + (this.props.item.icon || '' )+ ".jpg";
+        }
+
         return url;
     }
 });
 
 module.exports = CharacterItem;
-
-//url + icon +.jpg

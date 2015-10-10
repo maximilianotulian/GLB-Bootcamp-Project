@@ -30,17 +30,18 @@ var CharacterInfo = React.createClass({
                     <button {...this.getButtonProps()}> {data.level}</button>
                 </div>
                 <div {...this.getDivWrapperProps()}>
-                    <h4> {data.name} </h4>
-                    <p> Class: {data.class}</p>
-                    <p> Gender: {data.gender}</p>
-                    <p> Race: {data.race}</p>
-                    <p>Achievement Points: {data.achievementPoints}</p>
+                    <span className="panel--span"> {data.name} </span>
+                    <span className="panel--span"> Class: {data.class}</span>
+                    <span className="panel--span"> Gender: {data.gender}</span>
+                    <span className="panel--span"> Race: {data.race}</span>
+                    <span className="panel--span">Achievement Points: {data.achievementPoints}</span>
                 </div>
                 <div {...this.getDivWrapperProps()}>
-                    <h4> {data.realm} </h4>
-                    <p> Total Honorable Kills: {data.totalHonorableKills}</p>
-                    <p> Average Item Level: {data.items.averageItemLevel}</p>
-                    <p> Average Item Equipped: {data.items.averageItemLevelEquipped}</p>
+                    <span className="panel--span"> {data.realm} </span>
+                    <span className="panel--span"> Total Honorable Kills: {data.totalHonorableKills}</span>
+                    <span className="panel--span"> Average Item Level: {data.items.averageItemLevel}</span>
+                    <span className="panel--span"> Average Item Equipped: {data.items.averageItemLevelEquipped}</span>
+                    <span className="panel--span"> Battle Group: {data.battlegroup}</span>
                 </div>
             </section>
         );
@@ -104,7 +105,7 @@ var CharacterInfo = React.createClass({
         };
 
         return classNames(classes);
-    },
+    }
 });
 
 module.exports = CharacterInfo;

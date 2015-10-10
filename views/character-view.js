@@ -14,6 +14,7 @@ var CharacterInfo = require('../components/character-info');
 var CharacterStats = require('../components/character-stats');
 var CharacterItem = require('../components/character-item');
 var UnOrderedList = require('../components/unordered-list');
+var CharacterPvp = require('../components/character-pvp');
 
 var CharacterView = React.createClass({
 
@@ -84,8 +85,23 @@ var CharacterView = React.createClass({
 
     renderPvp: function () {
         return (
-            <div className="col-md-6 panel-body"> hola soy el pvp </div>
+            <div className="col-md-7 panel-body">
+                <CharacterPvp {...this.getCharacterPvpProps()} />
+            </div>
         )
+    },
+
+    getCharacterPvpProps: function () {
+        return {
+            className: this.getCharacterPvpClass(),
+            data: this.state.data.pvp.brackets
+        }
+    },
+
+    getCharacterPvpClass: function () {
+        var classes = {};
+
+        return classNames(classes);
     },
 
     renderItems: function () {
@@ -174,12 +190,12 @@ var CharacterView = React.createClass({
     },
 
     handleInputChange: function (event) {
-        this.setState({name: event.target.value});
+        this.setState({ name: event.target.value });
     },
 
     handleClick: function () {
         characterApi.getCharacterInfo(this.updateState, this.state.name, this.state.realm);
-        this.setState({name: ''});
+        this.setState({ name: '' });
     },
 
     updateState: function (result) {

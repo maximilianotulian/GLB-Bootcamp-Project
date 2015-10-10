@@ -64,7 +64,8 @@ var CharacterStats = React.createClass({
         return {
             className: this.getUnOrderedListClass(),
             items: items || [],
-            title: title
+            title: title,
+            inverted: true
         }
     },
 

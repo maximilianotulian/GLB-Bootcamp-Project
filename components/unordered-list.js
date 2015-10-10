@@ -8,7 +8,7 @@ var UnOrderedList = React.createClass({
             React.PropTypes.array,
             React.PropTypes.object
         ]),
-        title: React.PropTypes.string
+        title: React.PropTypes.string,
     },
 
     render: function () {
@@ -59,10 +59,12 @@ var UnOrderedList = React.createClass({
     },
 
     getListItemClass: function (index) {
+        var props = this.props;
+
         var classes = {
             'list-group-item': true,
             'list-group-item-success': true,
-            'list-group-item-info': ((index % 2) === 0),
+            'list-group-item-info': ((index % 2) === 0) && (props.inverted)
         };
 
         return classNames(classes);
