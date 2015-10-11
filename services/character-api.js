@@ -37,7 +37,7 @@ var filterStatsInfo = function (result) {
         stamina: result.sta,
         strength: result.str,
         mana: result.power,
-        spell: result.spellPower,
+        spell: result.spellPower
     }]
 };
 var filterCharacterInfo = function (result) {
@@ -59,7 +59,7 @@ var filterCharacterInfo = function (result) {
     return result;
 };
 var filterChallengeInfo = function (result) {
-    return result;
+    return result.challenge;
 };
 var filterLeaderBoardsInfo = function (result) {
     return result;
@@ -125,7 +125,7 @@ CharacterApi.prototype.getCharacterInfo = function (success, name, realm) {
 CharacterApi.prototype.getChallengeRealm = function (success, realm) {
 
     $.ajax({
-        url: 'https://us.api.battle.net/wow/challenge/' + (realm || this.realm),
+        url: 'https://us.api.battle.net/wow/challenge/'+ (realm || this.realm),
         type: 'get',
         dataType: 'json',
         data: {

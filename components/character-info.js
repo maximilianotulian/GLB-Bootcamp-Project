@@ -19,7 +19,51 @@ var CharacterInfo = React.createClass({
     },
 
     renderCharacterApi: function () {
-        var data = this.props.data;
+        var data = null;
+        var infoName = null;
+        var infoClass = null;
+        var infoRace = null;
+        var infoGender = null;
+        var infoLevel = null;
+        var infoAchievement = null;
+        var infoTotalHonorableKills = null;
+        var infoAverageItemLevel = null;
+        var infoAverageItemLevelEquipped = null ;
+        var infoBattleGroup = null;
+
+        if (this.props.data) {
+            data = this.props.data;
+            if (!_.isUndefined(data.name)) {
+                infoName = data.name;
+            }
+            if (!_.isUndefined(data.class)) {
+                infoClass = data.class;
+            }
+            if (!_.isUndefined(data.race )) {
+                infoRace = data.race;
+            }
+            if (!_.isUndefined(data.gender)) {
+                infoGender = data.gender;
+            }
+            if (!_.isUndefined(data.level)) {
+                infoLevel = data.level;
+            }
+            if (!_.isUndefined(data.achievementPoints)) {
+                infoAchievement = data.achievementPoints;
+            }
+            if (!_.isUndefined(data.totalHonorableKills)) {
+                infoTotalHonorableKills = data.totalHonorableKills;
+            }
+            if (!_.isUndefined(data.items.averageItemLevel)) {
+                infoAverageItemLevel = data.items.averageItemLevel;
+            }
+            if (!_.isUndefined(data.items.averageItemLevelEquipped)) {
+                infoAverageItemLevelEquipped = data.items.averageItemLevelEquipped;
+            }
+            if (!_.isUndefined(data.battlegroup)) {
+               infoBattleGroup = data.battlegroup;
+            }
+        }
 
         return (
             <section className="panel-body">
@@ -27,21 +71,21 @@ var CharacterInfo = React.createClass({
                     <div {...this.getDivProps}>
                         <img {...this.getImgProps()}/>
                     </div>
-                    <button {...this.getButtonProps()}> {data.level}</button>
+                    <button {...this.getButtonProps()}> {infoLevel}</button>
                 </div>
                 <div {...this.getDivWrapperProps()}>
-                    <span className="panel--span"> {data.name} </span>
-                    <span className="panel--span"> Class: {data.class}</span>
-                    <span className="panel--span"> Gender: {data.gender}</span>
-                    <span className="panel--span"> Race: {data.race}</span>
-                    <span className="panel--span">Achievement Points: {data.achievementPoints}</span>
+                    <span className="panel--span"> {infoName} </span>
+                    <span className="panel--span"> Class: {infoClass}</span>
+                    <span className="panel--span"> Gender: {infoGender}</span>
+                    <span className="panel--span"> Race: {infoRace}</span>
+                    <span className="panel--span">Achievement Points: {infoAchievement}</span>
                 </div>
                 <div {...this.getDivWrapperProps()}>
                     <span className="panel--span"> {data.realm} </span>
-                    <span className="panel--span"> Total Honorable Kills: {data.totalHonorableKills}</span>
-                    <span className="panel--span"> Average Item Level: {data.items.averageItemLevel}</span>
-                    <span className="panel--span"> Average Item Equipped: {data.items.averageItemLevelEquipped}</span>
-                    <span className="panel--span"> Battle Group: {data.battlegroup}</span>
+                    <span className="panel--span"> Total Honorable Kills: {infoTotalHonorableKills}</span>
+                    <span className="panel--span"> Average Item Level: {infoAverageItemLevel}</span>
+                    <span className="panel--span"> Average Item Equipped: {infoAverageItemLevelEquipped}</span>
+                    <span className="panel--span"> Battle Group: {infoBattleGroup}</span>
                 </div>
             </section>
         );
