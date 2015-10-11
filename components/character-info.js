@@ -130,11 +130,12 @@ var CharacterInfo = React.createClass({
         var name = '';
 
         if (!_.isUndefined(props.data)) {
-            if (!_.isUndefined(props.data.thumbnail)) {
-                thumbnail = 'http://us.battle.net/static-render/us/' + props.data.thumbnail;
+            data = props.data;
+            if (!_.isUndefined(data.thumbnail)) {
+                thumbnail = 'http://us.battle.net/static-render/us/' + data.thumbnail;
             }
-            if (!_.isUndefined(props.data.name)) {
-                name = props.data.name;
+            if (!_.isUndefined(data.name)) {
+                name = data.name;
             }
         }
 
