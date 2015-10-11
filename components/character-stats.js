@@ -20,16 +20,15 @@ var CharacterStats = React.createClass({
             </div>
         )
     },
+
     getProps: function () {
         return {
-            className : this.getClass()
+            className: this.getClass()
         }
     },
 
-    getClass: function() {
-        var classes = {
-
-        };
+    getClass: function () {
+        var classes = {};
         classes[this.props.className] = (this.props.className);
 
         return classNames(classes);
@@ -54,13 +53,14 @@ var CharacterStats = React.createClass({
                 Haste: stats.haste
             }
         } else if (title === 'Other') {
-            items= {
+            items = {
                 Health: stats.health,
                 Mana: stats.pwer,
                 Stamina: stats.sta,
                 'Multi Strike': stats.multistrike
             }
         }
+
         return {
             className: this.getUnOrderedListClass(),
             items: items || [],

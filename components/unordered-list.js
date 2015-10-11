@@ -8,7 +8,7 @@ var UnOrderedList = React.createClass({
             React.PropTypes.array,
             React.PropTypes.object
         ]),
-        title: React.PropTypes.string,
+        title: React.PropTypes.string
     },
 
     render: function () {

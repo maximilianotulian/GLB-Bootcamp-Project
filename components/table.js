@@ -4,7 +4,6 @@ var classNames = require('classnames');
 var _ = require('lodash');
 
 // COMPONENTS
-var Row = require('../components/row');
 var $ = require('jquery');
 
 var Table = React.createClass({
@@ -26,6 +25,25 @@ var Table = React.createClass({
         );
     },
 
+    renderLoading: function () {
+        return (
+            <tr key="0">
+                <td {...this.getLoadingProps()}>Loading...</td>
+            </tr>
+        );
+    },
+
+    renderTableBody: function () {
+        var rowsContent = this.props.rowsContent || [];
+        var content = rowsContent.map(this.renderTableRow);
+
+        if (content.length === 0) {
+            content = this.renderLoading();
+        }
+
+        return <tbody>{content}</tbody>;
+    },
+
     renderTableHeaders: function () {
         var headers = this.props.rows || [];
         var content = headers.map(this.renderTableHeader);
@@ -43,17 +61,6 @@ var Table = React.createClass({
         return <th {...this.getTableHeaderProps(index)}>{head}</th>;
     },
 
-    renderTableBody: function () {
-        var rowsContent = this.props.rowsContent || [];
-        var content = rowsContent.map(this.renderTableRow);
-
-        if (content.length === 0) {
-            content = this.renderLoading();
-        }
-
-        return <tbody>{content}</tbody>;
-    },
-
     renderTableRow: function (row, index) {
         var rows = this.props.rows || [];
         var content = rows.map(this.renderTableCell.bind(this, row));
@@ -67,12 +74,20 @@ var Table = React.createClass({
         return <td key={index} className="custom-table--cell"> {content} </td>;
     },
 
-    renderLoading: function () {
-        return (
-            <tr key="0">
-                <td {...this.getLoadingProps()}>Loading...</td>
-            </tr>
-        );
+    getLoadingProps: function () {
+        var props = this.props;
+        var length;
+
+        if (_.isUndefined(props.length)) {
+            length = 1;
+        } else {
+            length = props.length;
+        }
+
+        return {
+            colSpan: length,
+            classNames: 'td-align-center'
+        }
     },
 
     getTableRowProps: function (index) {
@@ -96,7 +111,7 @@ var Table = React.createClass({
 
     getTableProps: function () {
         return {
-            className: this.getClass()
+            className: this.getTableClass()
         };
     },
 
@@ -107,30 +122,14 @@ var Table = React.createClass({
         };
     },
 
-    getLoadingProps: function () {
-        var props = this.props;
-        var length;
-
-        if (_.isUndefined(props.length)) {
-            length = 1;
-        } else {
-            length = props.length;
-        }
-
-        return {
-            colSpan: length,
-            classNames: 'td-align-center'
-        }
-    },
-
-    getClass: function () {
+    getTableClass: function () {
         var classes = {
             'custom-table': true
         };
 
         return classNames(classes);
     }
-
+    
 });
 
 module.exports = Table;

@@ -28,11 +28,11 @@ var CharacterPvp = React.createClass({
 
     getProps: function () {
         return {
-            className : this.getClass()
+            className: this.getClass()
         }
     },
 
-    getClass: function() {
+    getClass: function () {
         var classes = {
             'row': true,
             'panel': true,
@@ -42,15 +42,6 @@ var CharacterPvp = React.createClass({
         classes[this.props.className] = (this.props.className);
 
         return classNames(classes);
-    },
-
-    getUnOrderedListProps: function (title) {
-
-        return {
-            className: this.getUnOrderedListClass(),
-            items: this.getItems(title),
-            title: title
-        }
     },
 
     getItems: function (title) {
@@ -75,6 +66,23 @@ var CharacterPvp = React.createClass({
         return items || []
     },
 
+    getUnOrderedListProps: function (title) {
+
+        return {
+            className: this.getUnOrderedListClass(),
+            items: this.getItems(title),
+            title: title
+        }
+    },
+
+    getUnOrderedListClass: function () {
+        var classes = {
+            'col-md-3': true
+        };
+
+        return classNames(classes);
+    },
+
     setItemInfo: function (key) {
         var stats = this.props.data;
         var items = {
@@ -86,14 +94,6 @@ var CharacterPvp = React.createClass({
         };
 
         return items
-    },
-
-    getUnOrderedListClass: function () {
-        var classes = {
-            'col-md-3': true
-        };
-
-        return classNames(classes);
     }
 });
 

@@ -214,10 +214,7 @@ var CharacterView = React.createClass({
 
     handleClick: function () {
         characterApi.getCharacterInfo(this.updateState, this.state.name, this.state.realm);
-        this.setState({
-            name: '' ,
-            render:'loading'
-        });
+        this.setState({ render:'loading' });
     },
 
     updateState: function (result) {
