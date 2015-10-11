@@ -129,8 +129,8 @@ var CharacterInfo = React.createClass({
         var data = '';
         var name = '';
 
-        if (!_.isUndefined(props.data)) {
-            data = props.data;
+        if (!_.isUndefined(this.props.data)) {
+            data = this.props.data;
             if (!_.isUndefined(data.thumbnail)) {
                 thumbnail = 'http://us.battle.net/static-render/us/' + data.thumbnail;
             }
@@ -140,7 +140,7 @@ var CharacterInfo = React.createClass({
         }
 
         return {
-            src: 'http://us.battle.net/static-render/us/' + thumbnail,
+            src: thumbnail,
             className: this.getImgClass(),
             alt: 'this in a thumbnail of the character' + name
         }
