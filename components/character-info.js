@@ -25,21 +25,25 @@ var CharacterInfo = React.createClass({
         var infoRace = null;
         var infoGender = null;
         var infoLevel = null;
+        var infoRealm = null;
         var infoAchievement = null;
         var infoTotalHonorableKills = null;
         var infoAverageItemLevel = null;
-        var infoAverageItemLevelEquipped = null ;
+        var infoAverageItemLevelEquipped = null;
         var infoBattleGroup = null;
 
         if (this.props.data) {
             data = this.props.data;
+            if (!_.isUndefined(data.realm)) {
+                infoRealm = data.realm;
+            }
             if (!_.isUndefined(data.name)) {
                 infoName = data.name;
             }
             if (!_.isUndefined(data.class)) {
                 infoClass = data.class;
             }
-            if (!_.isUndefined(data.race )) {
+            if (!_.isUndefined(data.race)) {
                 infoRace = data.race;
             }
             if (!_.isUndefined(data.gender)) {
@@ -61,7 +65,7 @@ var CharacterInfo = React.createClass({
                 infoAverageItemLevelEquipped = data.items.averageItemLevelEquipped;
             }
             if (!_.isUndefined(data.battlegroup)) {
-               infoBattleGroup = data.battlegroup;
+                infoBattleGroup = data.battlegroup;
             }
         }
 
@@ -81,7 +85,7 @@ var CharacterInfo = React.createClass({
                     <span className="panel--span">Achievement Points: {infoAchievement}</span>
                 </div>
                 <div {...this.getDivWrapperProps()}>
-                    <span className="panel--span"> {data.realm} </span>
+                    <span className="panel--span"> {infoRealm} </span>
                     <span className="panel--span"> Total Honorable Kills: {infoTotalHonorableKills}</span>
                     <span className="panel--span"> Average Item Level: {infoAverageItemLevel}</span>
                     <span className="panel--span"> Average Item Equipped: {infoAverageItemLevelEquipped}</span>
@@ -106,8 +110,6 @@ var CharacterInfo = React.createClass({
     },
 
     getButtonProps: function () {
-        var data = this.props.data;
-
         return {
             className: this.getButtonClass()
         }
@@ -123,9 +125,23 @@ var CharacterInfo = React.createClass({
     },
 
     getImgProps: function () {
+        var thumbnail = '';
+        var data = '';
+        var name = '';
+
+        if (!_.isUndefined(props.data)) {
+            if (!_.isUndefined(props.data.thumbnail)) {
+                thumbnail = 'http://us.battle.net/static-render/us/' + props.data.thumbnail;
+            }
+            if (!_.isUndefined(props.data.name)) {
+                name = props.data.name;
+            }
+        }
+
         return {
-            src: 'http://us.battle.net/static-render/us/' + this.props.data.thumbnail,
-            className: this.getImgClass()
+            src: 'http://us.battle.net/static-render/us/' + thumbnail,
+            className: this.getImgClass(),
+            alt: 'this in a thumbnail of the character' + name
         }
     },
 
