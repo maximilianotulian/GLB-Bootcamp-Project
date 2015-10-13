@@ -48,7 +48,7 @@ var CharacterStats = React.createClass({
         var statHealt;
         var statMana;
         var statStamina;
-        var statMultiStrike
+        var statMultiStrike;
 
         if (!_.isUndefined(this.props.data)) {
             stats = this.props.data;

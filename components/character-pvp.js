@@ -84,13 +84,38 @@ var CharacterPvp = React.createClass({
     },
 
     setItemInfo: function (key) {
-        var stats = this.props.data;
-        var items = {
-            Rating: stats[key].rating,
-            'Season Lost': stats[key].seasonLost,
-            'Season Played': stats[key].seasonPlayed,
-            'Weekly Lost': stats[key].weeklyLost,
-            'Weekly Played': stats[key].weeklyPlayed
+        var stats;
+        var rating;
+        var seasonLost;
+        var seasonPlayed;
+        var weeklyLost;
+        var weeklyPlayed;
+        var items;
+
+        if (!_.isUndefined(this.props.data)) {
+            stats = this.props.data;
+            if (!_.isUndefined(stats[key].rating)) {
+                rating = stats[key].rating;
+            }
+            if (!_.isUndefined(stats[key].seasonLost)) {
+                seasonLost = stats[key].seasonLost;
+            }
+            if (!_.isUndefined(stats[key].seasonPlayed)) {
+                seasonPlayed = stats[key].seasonPlayed;
+            }
+            if (!_.isUndefined(stats[key].weeklyPlayed)) {
+                weeklyPlayed = stats[key].weeklyPlayed;
+            }
+            if (!_.isUndefined(stats[key].weeklyLost)) {
+                weeklyLost = stats[key].weeklyLost;
+            }
+        }
+        items = {
+            Rating: rating,
+            'Season Lost': seasonLost,
+            'Season Played': seasonPlayed,
+            'Weekly Lost': weeklyLost,
+            'Weekly Played': weeklyPlayed
         };
 
         return items
