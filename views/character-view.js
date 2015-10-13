@@ -20,12 +20,7 @@ var CharacterView = React.createClass({
 
     getInitialState: function () {
 
-        return {
-            data: [],
-            name: '',
-            realm: '',
-            render: 'initial'
-        }
+        return this.getState()
     },
 
     render: function () {
@@ -204,6 +199,29 @@ var CharacterView = React.createClass({
         return classNames(classes);
     },
 
+    getState: function () {
+        var initialState = {};
+        var params;
+
+        initialState.data = [];
+        initialState.realm = '';
+        initialState.name = '';
+        initialState.render = 'initial';
+        if (this.props && this.props.params) {
+            params = this.props.params;
+            if (params.realm) {
+                initialState.realm = params.realm;
+            }
+            if (params.name) {
+                initialState.name = params.name;
+                characterApi.getCharacterInfo(this.updateState, initialState.name, initialState.realm);
+                initialState.render = 'loading';
+            }
+        }
+
+        return initialState;
+    },
+
     handleInputChange: function (event) {
         this.setState({
             name: event.target.value,
@@ -214,7 +232,7 @@ var CharacterView = React.createClass({
 
     handleClick: function () {
         characterApi.getCharacterInfo(this.updateState, this.state.name, this.state.realm);
-        this.setState({ render:'loading' });
+        this.setState({render: 'loading'});
     },
 
     updateState: function (result) {

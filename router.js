@@ -21,11 +21,10 @@ module.exports = (function () {
                 <DefaultRoute name="home" handler={HomeView}/>
                 <Route name="realm" path="realm/" handler={RealmView}/>
                 <Route name="character" path="character/" handler={CharacterView}/>
+                <Route name="character-player" path="character-player/:name" handler={CharacterView}/>
                 <Route name="challenge" path="challenge/" handler={ChallengeView}/>
                 <Route name="pvp" path="pvp/" handler={PvpVIew}/>
-                <Route name="pvp-player" path="pvp/:idPlayer" handler={CharacterView}/>
                 <Route name="guild" path="guild/" handler={GuildView}/>
-                <Route name="guild-player" path="guild/:idPlayer" handler={ChallengeView}/>
             </Route>
         );
     };

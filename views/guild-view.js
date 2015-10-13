@@ -18,8 +18,23 @@ var GuildView = React.createClass({
     },
 
     render: function () {
+        var guild;
+        var name;
+        var level;
+
+        if (!_.isUndefined(this.state.guild)) {
+            guild = this.state.guild;
+            if (!_.isUndefined(guild.name)) {
+                name = guild.name;
+            }
+            if(!_.isUndefined(guild.level)) {
+                level = guild.level
+            }
+        }
+
         return (
             <div>
+                <span>{name + ' ' + level}</span>
                 <Table {...this.getTableProps()} />
             </div>
         )
@@ -54,7 +69,6 @@ var GuildView = React.createClass({
         var infoName;
         var infoThumbnail;
         var infoRace;
-        var infoPoints;
         var character;
 
         if (!_.isUndefined(member.character)) {
@@ -74,16 +88,15 @@ var GuildView = React.createClass({
         }
 
         return {
-            key: index,
-            name: infoName,
-            race: infoRace,
             class: infoClass,
+            name: infoName,
+            key: index,
+            race: infoRace,
             thumbnail: infoThumbnail
         }
     },
 
     updateState: function (result) {
-        console.log(result.members);
         this.setState({guild: result});
         //http://media.blizzard.com/wow/icons/18/faction_0.jpg horde
         //http://media.blizzard.com/wow/icons/18/faction_1.jpg alianza

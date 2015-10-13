@@ -2,6 +2,8 @@
 var React = require('react');
 var classNames = require('classnames');
 var _ = require('lodash');
+var ReactRouter = require('react-router');
+var Link = ReactRouter.Link;
 
 // COMPONENTS
 var $ = require('jquery');
@@ -70,6 +72,13 @@ var Table = React.createClass({
 
     renderTableCell: function (row, header, index) {
         var content = row[header] === true ? row[header].toString() : row[header];
+
+        if (header === 'thumbnail') {
+            content = <img alt="Thumbnail"src={content}/>;
+        }
+        if (header === 'name') {
+            content = <Link to={`/character-player/${content}`}>{content}</Link>;
+        }
 
         return <td key={index} className="custom-table--cell"> {content} </td>;
     },

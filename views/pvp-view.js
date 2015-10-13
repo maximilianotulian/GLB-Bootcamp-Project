@@ -40,6 +40,7 @@ var PvpView = React.createClass({
     },
 
     updateState: function (result) {
+        console.log(result.rows);
         this.setState({pvp: result.rows});
     }
 });

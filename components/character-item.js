@@ -9,6 +9,12 @@ var CharacterItem = React.createClass({
     },
 
     render: function () {
+
+        return this.renderItemInfo()
+
+    },
+
+    renderItemInfo: function () {
         var item;
         var itemLevel;
         var itemName;
@@ -16,6 +22,7 @@ var CharacterItem = React.createClass({
 
         if (!_.isUndefined(this.props.item)) {
             item = this.props.item;
+
             if (!_.isUndefined(item.itemLevel)) {
                 itemLevel = item.itemLevel;
             }
@@ -26,24 +33,24 @@ var CharacterItem = React.createClass({
                 itemArmor = item.armor;
             }
         }
+
         return (
             <div className="container">
                 <img {...this.getImgProps()} />
-
                 <div className="col-md-4">
                     <span {...this.getSpanProps(itemLevel)}>{itemName}</span>
-                    <span className="item--span">Item level {itemLevel}</span>
-                    <span className="item--span">Armor {itemArmor}</span>
+                    <span className="item--span"> {itemLevel ? 'Item level ' + itemLevel : ''}</span>
+                    <span className="item--span">{itemArmor ? 'Armor ' + itemArmor : ''}</span>
                 </div>
             </div>
         )
-    },
 
+    },
     getImgProps: function () {
         return {
             className: this.getImgClass(),
             src: this.getUrl(),
-            alt: 'icon'
+            alt: 'item'
         }
     },
 
