@@ -36,28 +36,80 @@ var CharacterStats = React.createClass({
 
     getUnOrderedListProps: function (title) {
         var items;
-        var stats = this.props.data;
+        var stats;
+        var statStr;
+        var statAgi;
+        var statInt;
+        var statMastery;
+        var statAttackPower;
+        var statCrit;
+        var statDodge;
+        var statHaste;
+        var statHealt;
+        var statMana;
+        var statStamina;
+        var statMultiStrike
+
+        if (!_.isUndefined(this.props.data)) {
+            stats = this.props.data;
+            if (!_.isUndefined(stats.str)) {
+                statStr = stats.str;
+            }
+            if (!_.isUndefined(stats.agi)) {
+                statAgi = stats.agi;
+            }
+            if (!_.isUndefined(stats.int)) {
+                statInt = stats.int;
+            }
+            if (!_.isUndefined(stats.mastery)) {
+                statMastery = stats.mastery;
+            }
+            if (!_.isUndefined(stats.attackPower)) {
+                statAttackPower = stats.attackPower;
+            }
+            if (!_.isUndefined(stats.crit)) {
+                statCrit = stats.crit;
+            }
+            if (!_.isUndefined(stats.dodge)) {
+                statDodge = stats.dodge;
+            }
+            if (!_.isUndefined(stats.haste)) {
+                statHaste = stats.haste;
+            }
+            if (!_.isUndefined(stats.health)) {
+                statHealt = stats.health;
+            }
+            if (!_.isUndefined(stats.power)) {
+                statMana = stats.power;
+            }
+            if (!_.isUndefined(stats.sta)) {
+                statStamina = stats.sta;
+            }
+            if (!_.isUndefined(stats.multistrike)) {
+                statMultiStrike = stats.multistrike;
+            }
+        }
 
         if (title === 'General') {
             items = {
-                Strength: stats.str,
-                Agility: stats.agi,
-                Intelect: stats.int,
-                Mastery: stats.mastery
+                Strength: statStr,
+                Agility: statAgi,
+                Intelect: statInt,
+                Mastery: statMastery
             };
         } else if (title === 'Atack') {
             items = {
-                Attack: stats.attackPower,
-                Critical: stats.crit,
-                Dodge: stats.dodge,
-                Haste: stats.haste
+                Attack: statAttackPower,
+                Critical: statCrit,
+                Dodge: statDodge,
+                Haste: statHaste
             }
         } else if (title === 'Other') {
             items = {
-                Health: stats.health,
-                Mana: stats.pwer,
-                Stamina: stats.sta,
-                'Multi Strike': stats.multistrike
+                Health: statHealt,
+                Mana: statMana,
+                Stamina: statStamina,
+                'Multi Strike': statMultiStrike
             }
         }
 

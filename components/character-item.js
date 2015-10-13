@@ -9,14 +9,31 @@ var CharacterItem = React.createClass({
     },
 
     render: function () {
-        var item = this.props.item;
+        var item;
+        var itemLevel;
+        var itemName;
+        var itemArmor;
+
+        if (!_.isUndefined(this.props.item)) {
+            item = this.props.item;
+            if (!_.isUndefined(item.itemLevel)) {
+                itemLevel = item.itemLevel;
+            }
+            if (!_.isUndefined(item.name)) {
+                itemName = item.name;
+            }
+            if (!_.isUndefined(item.armor)) {
+                itemArmor = item.armor;
+            }
+        }
         return (
             <div className="container">
                 <img {...this.getImgProps()} />
+
                 <div className="col-md-4">
-                    <span {...this.getSpanProps(item.itemLevel)}>{item.name}</span>
-                    <span className="item--span">Item level {item.itemLevel}</span>
-                    <span className="item--span">Armor {item.armor}</span>
+                    <span {...this.getSpanProps(itemLevel)}>{itemName}</span>
+                    <span className="item--span">Item level {itemLevel}</span>
+                    <span className="item--span">Armor {itemArmor}</span>
                 </div>
             </div>
         )
@@ -26,7 +43,7 @@ var CharacterItem = React.createClass({
         return {
             className: this.getImgClass(),
             src: this.getUrl(),
-            alt: 'This is an item icon image'
+            alt: 'icon'
         }
     },
 
@@ -59,13 +76,16 @@ var CharacterItem = React.createClass({
 
     getUrl: function () {
         var url;
+        var item;
 
-        if (_.isUndefined(this.props.item.icon)) {
-            url= '';
-        } else {
-            url = "http://media.blizzard.com/wow/icons/56/" + (this.props.item.icon || '' )+ ".jpg";
+        if (!_.isUndefined(this.props.item)) {
+            item = this.props.item;
+            if (!_.isUndefined(item.icon)) {
+                url = "http://media.blizzard.com/wow/icons/56/" + (item.icon || '' ) + ".jpg";
+            } else {
+                url = "";
+            }
         }
-
         return url;
     }
 });
