@@ -1,5 +1,6 @@
 // LIBS
 var React = require('react');
+var _ = require('lodash');
 
 // SERVICES
 var characterApi = require('../services/character-api');
@@ -32,16 +33,58 @@ var GuildView = React.createClass({
     },
 
     getRows: function () {
-        return ['battlegroup']
+        return ['thumbnail','name','race','class']
     },
 
     getRowsContent: function () {
-        return [];
+        var members;
+        var filteredGuild;
+
+        if (this.state.guild.members) {
+            members = this.state.guild.members.map(this.getMember);
+        }
+        filteredGuild = {
+            members: members
+        };
+        return members;
+    },
+
+    getMember: function (member, index) {
+        var infoClass;
+        var infoName;
+        var infoThumbnail;
+        var infoRace;
+        var infoPoints;
+        var character;
+
+        if (!_.isUndefined(member.character)) {
+            character = member.character;
+            if (!_.isUndefined(character.name)) {
+                infoName = character.name;
+            }
+            if (!_.isUndefined(character.race)) {
+                infoRace = character.race;
+            }
+            if (!_.isUndefined(character.class)) {
+                infoClass = character.class;
+            }
+            if (!_.isUndefined(character.thumbnail)) {
+                infoThumbnail = 'http://us.battle.net/static-render/us/' + character.thumbnail;
+            }
+        }
+
+        return {
+            key: index,
+            name: infoName,
+            race: infoRace,
+            class: infoClass,
+            thumbnail: infoThumbnail
+        }
     },
 
     updateState: function (result) {
-        console.log(result);
-        //this.setState({pvp: result.rows});
+        console.log(result.members);
+        this.setState({guild: result});
         //http://media.blizzard.com/wow/icons/18/faction_0.jpg horde
         //http://media.blizzard.com/wow/icons/18/faction_1.jpg alianza
         //http://media.blizzard.com/wow/icons/18/faction_-1.jpg neutral
