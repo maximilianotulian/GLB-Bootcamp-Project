@@ -1,6 +1,8 @@
 // LIBS
 var React = require('react');
 var _ = require('lodash');
+var Input = require('../components/input');
+var Button = require('../components/button');
 
 // SERVICES
 var characterApi = require('../services/character-api');
@@ -11,9 +13,9 @@ var Table = require('../components/table');
 var GuildView = React.createClass({
 
     getInitialState: function () {
-        characterApi.getGuildProfile(this.updateState);
         return {
-            guild: []
+            guild: [],
+            name: ''
         }
     },
 
@@ -27,14 +29,18 @@ var GuildView = React.createClass({
             if (!_.isUndefined(guild.name)) {
                 name = guild.name;
             }
-            if(!_.isUndefined(guild.level)) {
+            if (!_.isUndefined(guild.level)) {
                 level = guild.level
             }
         }
 
         return (
             <div>
-                <span>{name + ' ' + level}</span>
+                <section>
+                    <Input {...this.getInputProps()}/>
+                    <Button {...this.getButtonProps()}> Find </Button>
+                </section>
+                <span>{(name || '') + ' ' + (level || '')}</span>
                 <Table {...this.getTableProps()} />
             </div>
         )
@@ -48,7 +54,7 @@ var GuildView = React.createClass({
     },
 
     getRows: function () {
-        return ['thumbnail','name','race','class']
+        return ['thumbnail', 'name', 'race', 'class']
     },
 
     getRowsContent: function () {
@@ -94,6 +100,31 @@ var GuildView = React.createClass({
             race: infoRace,
             thumbnail: infoThumbnail
         }
+    },
+
+    getButtonProps: function () {
+        return {
+            onClick: this.handleClick
+        }
+    },
+
+    getInputProps: function () {
+        return {
+            value: this.state.name,
+            onChange: this.handleInputChange,
+            placeholder: 'Name'
+        }
+    },
+
+    handleInputChange: function (event) {
+        this.setState({
+            name: event.target.value,
+            guild: []
+        });
+    },
+
+    handleClick: function () {
+        characterApi.getGuildProfile(this.updateState, this.state.name);
     },
 
     updateState: function (result) {
