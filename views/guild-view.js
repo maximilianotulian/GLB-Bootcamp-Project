@@ -49,15 +49,15 @@ var GuildView = React.createClass({
     },
 
     renderTable: function () {
-        return(
+        return (
             <table className="table">
                 <thead>
-                    <tr>
-                        <th>Thumbnail</th>
-                        <th>Name</th>
-                        <th>Race</th>
-                        <th>Class</th>
-                    </tr>
+                <tr>
+                    <th>Thumbnail</th>
+                    <th>Name</th>
+                    <th>Race</th>
+                    <th>Class</th>
+                </tr>
                 </thead>
                 {this.renderTableBody()}
             </table>
@@ -102,14 +102,11 @@ var GuildView = React.createClass({
 
     getRowsContent: function () {
         var members;
-        var filteredGuild;
 
         if (this.state.guild.members) {
             members = this.state.guild.members.map(this.getMember);
         }
-        filteredGuild = {
-            members: members
-        };
+
         return members;
     },
 

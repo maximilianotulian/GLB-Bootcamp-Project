@@ -30,9 +30,9 @@ var ChallengeView = React.createClass({
     },
 
     renderHeader: function () {
-        var name = 'Loading...' ;
-        var realm = '';
-        var timezone = '';
+        var name;
+        var realm;
+        var timezone;
         var challenge;
 
         if (this.state.challenge[this.state.index]) {
@@ -48,9 +48,9 @@ var ChallengeView = React.createClass({
 
         return (
             <div >
-                <h4 className="col-md-4">{name}</h4>
-                <h4 className="col-md-4">{realm}</h4>
-                <h4 className="col-md-4">{timezone}</h4>
+                <h4 className="col-md-4">{name || 'Loading...'}</h4>
+                <h4 className="col-md-4">{realm || 'Loading...'}</h4>
+                <h4 className="col-md-4">{timezone || 'Loading...'}</h4>
             </div>
         )
     },

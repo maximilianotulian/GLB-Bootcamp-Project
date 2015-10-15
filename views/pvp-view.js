@@ -2,6 +2,7 @@
 var React = require('react');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
+var classNames = require('classnames');
 
 // SERVICES
 var characterApi = require('../services/character-api');
@@ -49,15 +50,32 @@ var PvpView = React.createClass({
         var realm = row['realmName'];
         var content = rows.map(this.renderTableCell.bind(this,row,realm));
 
-        return <tr key={index}>{content}</tr>
+        return <tr {...this.getTableRowProps(index)}>{content}</tr>
     },
 
     renderTableCell: function (row, realm, header, index) {
         var content = row[header];
+
         if (header === 'name') {
             content = <Link to={'/character-player/'+row[header]+'/realm/'+realm}>{row[header]}</Link>;
         }
-        return <td key={index}>{content}</td>
+
+        return <td key={index}>{content}</td>;
+    },
+
+    getTableRowProps: function (index) {
+        return {
+            key: index,
+            className: this.getTableRowClass(index)
+        };
+    },
+
+    getTableRowClass: function (index) {
+        var classes = {
+            'custom-row': true,
+            'custom-row--inverted': ((index % 2) === 0)
+        };
+        return classNames(classes);
     },
 
     updateState: function (result) {
