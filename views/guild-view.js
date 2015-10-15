@@ -84,7 +84,7 @@ var GuildView = React.createClass({
             content = <img alt="Thumbnail" src={content}/>;
         }
         if (header === 'name') {
-            content = <Link to={`/character-player/${content}`}>{content}</Link>;
+            content = <Link to={'/character-player/'+content}>{content}</Link>;
         }
         return <td key={index}> {content} </td>
     },
@@ -171,7 +171,6 @@ var GuildView = React.createClass({
     },
 
     updateState: function (result) {
-        console.log(result);
         this.setState({guild: result});
         //http://media.blizzard.com/wow/icons/18/faction_0.jpg horde
         //http://media.blizzard.com/wow/icons/18/faction_1.jpg alianza

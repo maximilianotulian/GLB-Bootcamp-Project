@@ -55,7 +55,7 @@ var PvpView = React.createClass({
     renderTableCell: function (row, realm, header, index) {
         var content = row[header];
         if (header === 'name') {
-            content = <Link to={`/character-player/${row[header]}/realm/${realm}`}>{row[header]}</Link>;
+            content = <Link to={'/character-player/'+row[header]+'/realm/'+realm}>{row[header]}</Link>;
         }
         return <td key={index}>{content}</td>
     },
