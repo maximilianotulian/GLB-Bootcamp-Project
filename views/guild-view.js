@@ -3,6 +3,8 @@ var React = require('react');
 var _ = require('lodash');
 var Input = require('../components/input');
 var Button = require('../components/button');
+var ReactRouter = require('react-router');
+var Link = ReactRouter.Link;
 
 // SERVICES
 var characterApi = require('../services/character-api');
@@ -41,9 +43,50 @@ var GuildView = React.createClass({
                     <Button {...this.getButtonProps()}> Find </Button>
                 </section>
                 <span>{(name || '') + ' ' + (level || '')}</span>
-                <Table {...this.getTableProps()} />
+                {this.renderTable()}
             </div>
         )
+    },
+
+    renderTable: function () {
+        return(
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Thumbnail</th>
+                        <th>Name</th>
+                        <th>Race</th>
+                        <th>Class</th>
+                    </tr>
+                </thead>
+                {this.renderTableBody()}
+            </table>
+        )
+    },
+
+    renderTableBody: function () {
+        var rowsContent = this.getRowsContent() || [];
+        var content = rowsContent.map(this.renderTableRow);
+
+        return <tbody>{content}</tbody>
+    },
+
+    renderTableRow: function (row, index) {
+        var rows = this.getRows();
+        var content = rows.map(this.renderTableCell.bind(this, row));
+
+        return <tr key={index}>{content}</tr>
+    },
+
+    renderTableCell: function (row, header, index) {
+        var content = row[header];
+        if (header === 'thumbnail') {
+            content = <img alt="Thumbnail" src={content}/>;
+        }
+        if (header === 'name') {
+            content = <Link to={`/character-player/${content}`}>{content}</Link>;
+        }
+        return <td key={index}> {content} </td>
     },
 
     getTableProps: function () {
@@ -128,6 +171,7 @@ var GuildView = React.createClass({
     },
 
     updateState: function (result) {
+        console.log(result);
         this.setState({guild: result});
         //http://media.blizzard.com/wow/icons/18/faction_0.jpg horde
         //http://media.blizzard.com/wow/icons/18/faction_1.jpg alianza

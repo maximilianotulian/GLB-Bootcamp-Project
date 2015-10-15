@@ -73,13 +73,6 @@ var Table = React.createClass({
     renderTableCell: function (row, header, index) {
         var content = row[header] === true ? row[header].toString() : row[header];
 
-        if (header === 'thumbnail') {
-            content = <img alt="Thumbnail"src={content}/>;
-        }
-        if (header === 'name') {
-            content = <Link to={`/character-player/${content}`}>{content}</Link>;
-        }
-
         return <td key={index} className="custom-table--cell"> {content} </td>;
     },
 

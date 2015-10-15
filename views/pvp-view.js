@@ -1,5 +1,7 @@
 // LIBS
 var React = require('react');
+var ReactRouter = require('react-router');
+var Link = ReactRouter.Link;
 
 // SERVICES
 var characterApi = require('../services/character-api');
@@ -19,28 +21,46 @@ var PvpView = React.createClass({
     render: function () {
         return (
             <div>
-                <Table {...this.getTableProps()}/>
+                <table className="table">
+                    <thead>
+                    <tr>
+                        <th>Ranking</th>
+                        <th>Name</th>
+                        <th>Real name</th>
+                        <th>Season losses</th>
+                        <th>Seasons wins</th>
+                    </tr>
+                    </thead>
+                    {this.renderTableBody()}
+                </table>
             </div>
         )
     },
 
-    getTableProps: function () {
-        return {
-            rows: this.getRows(),
-            rowsContent: this.getRowsContent()
+    renderTableBody: function () {
+        var rowsContent = this.state.pvp || [];
+        var content = rowsContent.map(this.renderTableRow);
+
+        return <tbody>  {content}  </tbody>;
+    },
+
+    renderTableRow: function (row, index) {
+        var rows = ['ranking','name','realmName','seasonLosses','seasonWins'];
+        var realm = row['realmName'];
+        var content = rows.map(this.renderTableCell.bind(this,row,realm));
+
+        return <tr key={index}>{content}</tr>
+    },
+
+    renderTableCell: function (row, realm, header, index) {
+        var content = row[header];
+        if (header === 'name') {
+            content = <Link to={`/character-player/${row[header]}/realm/${realm}`}>{row[header]}</Link>;
         }
-    },
-
-    getRows: function () {
-        return ['ranking', 'name', 'realmName','seasonLosses','seasonWins']
-    },
-
-    getRowsContent: function () {
-        return this.state.pvp;
+        return <td key={index}>{content}</td>
     },
 
     updateState: function (result) {
-        console.log(result.rows);
         this.setState({pvp: result.rows});
     }
 });
