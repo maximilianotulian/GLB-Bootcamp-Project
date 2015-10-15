@@ -53,7 +53,8 @@ var MainView = React.createClass({
     getDivClass: function () {
         var classes = {
             'row': true,
-            'custom-section': true
+            'custom-section': true,
+            'main-view': true
         };
 
         return classNames(classes);
