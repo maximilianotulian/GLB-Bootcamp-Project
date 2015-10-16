@@ -3,8 +3,10 @@ var React = require('react');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
 var classNames = require('classnames');
+var Glyphicon = require('../components/glyphicon');
 
 var HeaderView = React.createClass({
+
     render: function () {
         return (
             <ul {...this.getProps()}>
@@ -33,13 +35,14 @@ var HeaderView = React.createClass({
     getProps: function () {
         return {
             className: this.getClass()
-        }
+        };
     },
 
     getClass: function () {
         var classes = {
             'nav': true,
-            'navbar-nav': true
+            'navbar-nav': true,
+            'header-view': true
         };
 
         return classNames(classes);
