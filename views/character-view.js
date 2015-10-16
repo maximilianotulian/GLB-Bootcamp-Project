@@ -44,6 +44,8 @@ var CharacterView = React.createClass({
             content = this.getLoadingContent();
         } else if (this.state.render === 'complete') {
             content = this.getCompleteContent();
+        } else if (this.state.render === 'error') {
+            content = this.getErrorContent();
         }
         return content;
     },
@@ -126,6 +128,15 @@ var CharacterView = React.createClass({
         return (
             <section>
                 Loading....
+            </section>
+        )
+    },
+
+    getErrorContent: function () {
+        var response = this.state.data.statusText;
+        return (
+            <section>
+                { 'character ' + response.toLowerCase() }
             </section>
         )
     },
@@ -214,7 +225,7 @@ var CharacterView = React.createClass({
             }
             if (params.name) {
                 initialState.name = params.name;
-                characterApi.getCharacterInfo(this.updateState, initialState.name, initialState.realm);
+                characterApi.getCharacterInfo(this.updateState, initialState.name, initialState.realm, this.setError);
                 initialState.render = 'loading';
             }
         }
@@ -231,7 +242,7 @@ var CharacterView = React.createClass({
     },
 
     handleClick: function () {
-        characterApi.getCharacterInfo(this.updateState, this.state.name, this.state.realm);
+        characterApi.getCharacterInfo(this.updateState, this.state.name, this.state.realm, this.setError);
         this.setState({render: 'loading'});
     },
 
@@ -239,6 +250,15 @@ var CharacterView = React.createClass({
         this.setState({
             data: result,
             render: 'complete'
+        });
+    },
+
+    setError: function (xhr, status, error) {
+        console.log('error' + error);
+        console.log(xhr);
+        this.setState({
+            data: xhr,
+            render: 'error'
         });
     }
 });

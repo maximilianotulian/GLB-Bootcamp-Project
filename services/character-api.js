@@ -103,7 +103,7 @@ CharacterApi.prototype.getRealmStatus = function (success) {
 };
 
 // REQUIREMENT 2
-CharacterApi.prototype.getCharacterInfo = function (success, name, realm) {
+CharacterApi.prototype.getCharacterInfo = function (success, name, realm, error) {
 
     $.ajax({
         url: 'https://us.api.battle.net/wow/character/' + (realm || this.realm) + '/' + (name || this.name),
@@ -117,7 +117,7 @@ CharacterApi.prototype.getCharacterInfo = function (success, name, realm) {
         success: function (result) {
             success(filterCharacterInfo(result));
         },
-        error: onRequestError
+        error: error
     });
 };
 
