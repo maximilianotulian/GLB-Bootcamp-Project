@@ -25,7 +25,7 @@ var CharacterView = React.createClass({
 
     render: function () {
         return (
-            <div >
+            <div className="character-view">
                 <section>
                     <Input {...this.getInputProps()}/>
                     <Button {...this.getButtonProps()}> Find </Button>
@@ -136,7 +136,7 @@ var CharacterView = React.createClass({
         var response = this.state.data.statusText;
         return (
             <section>
-                { 'character ' + response.toLowerCase() }
+                <span className="character-view_error">{response} </span>
             </section>
         )
     },
@@ -254,8 +254,6 @@ var CharacterView = React.createClass({
     },
 
     setError: function (xhr, status, error) {
-        console.log('error' + error);
-        console.log(xhr);
         this.setState({
             data: xhr,
             render: 'error'
