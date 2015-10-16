@@ -9,6 +9,7 @@ var HeaderView = React.createClass({
 
     render: function () {
         return (
+
             <ul {...this.getProps()}>
                 <li {...this.getListItemProps()}>
                     <Link to="home">Home</Link>

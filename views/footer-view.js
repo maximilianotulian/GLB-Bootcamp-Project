@@ -6,10 +6,7 @@ var FooterView = React.createClass({
     render: function () {
         return (
             <div {...this.getProps()}>
-                <div className="col-md-4">
-
-                </div>
-                <div className="col-md-8">
+                <div>
                     <span className="footer-view--author">Created by: Maximiliano Tulian </span>
                     <span className="footer-view--mail">Contact information: <a href="mailto:maxtulian9@gmail.com">maxtulian93@gmail.com</a></span>
                 </div>
