@@ -46,6 +46,20 @@ var HeaderView = React.createClass({
         };
 
         return classNames(classes);
+    },
+
+    getListItemProps: function () {
+        return {
+            className: this.getListItemClass()
+        };
+    },
+
+    getListItemClass: function () {
+        var classes = {
+            'header-view--li-primary':true
+        };
+
+        return classNames(classes);
     }
 
 });
