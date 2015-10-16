@@ -10,22 +10,22 @@ var HeaderView = React.createClass({
     render: function () {
         return (
             <ul {...this.getProps()}>
-                <li>
+                <li {...this.getListItemProps()}>
                     <Link to="home">Home</Link>
                 </li>
-                <li>
+                <li {...this.getListItemProps()}>
                     <Link to="realm">Realm</Link>
                 </li>
-                <li>
+                <li {...this.getListItemProps()}>
                     <Link to="character">Character</Link>
                 </li>
-                <li>
+                <li {...this.getListItemProps()}>
                     <Link to="challenge">Challenge</Link>
                 </li>
-                <li>
+                <li {...this.getListItemProps()}>
                     <Link to="pvp">PVP</Link>
                 </li>
-                <li>
+                <li {...this.getListItemProps()}>
                     <Link to="guild">Guild</Link>
                 </li>
             </ul>
