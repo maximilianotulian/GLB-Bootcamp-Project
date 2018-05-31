@@ -19,7 +19,6 @@ var CharacterPvp = require('../components/character-pvp');
 var CharacterView = React.createClass({
 
     getInitialState: function () {
-
         return this.getState()
     },
 
@@ -53,7 +52,7 @@ var CharacterView = React.createClass({
     renderMainInfo: function () {
         return (
             <div {...this.getDivProps()}>
-                <CharacterInfo data={this.state.data}/>
+                <CharacterInfo data={this.state.data} />
             </div>
         )
     },

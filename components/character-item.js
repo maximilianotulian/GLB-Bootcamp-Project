@@ -9,9 +9,7 @@ var CharacterItem = React.createClass({
     },
 
     render: function () {
-
         return this.renderItemInfo()
-
     },
 
     renderItemInfo: function () {
@@ -70,7 +68,6 @@ var CharacterItem = React.createClass({
     },
 
     getSpanClass: function (itemLevel) {
-
         var classes = {
             'item--span': true,
             'item--green': (itemLevel > 350 && itemLevel < 450),

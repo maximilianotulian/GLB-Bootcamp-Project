@@ -14,9 +14,9 @@ var CharacterStats = React.createClass({
     render: function () {
         return (
             <div {...this.getProps()}>
-                <UnOrderedList {...this.getUnOrderedListProps('General')}/>
-                <UnOrderedList {...this.getUnOrderedListProps('Atack')}/>
-                <UnOrderedList {...this.getUnOrderedListProps('Other')}/>
+                <UnOrderedList {...this.getUnOrderedListProps('General')} />
+                <UnOrderedList {...this.getUnOrderedListProps('Atack')} />
+                <UnOrderedList {...this.getUnOrderedListProps('Other')} />
             </div>
         )
     },

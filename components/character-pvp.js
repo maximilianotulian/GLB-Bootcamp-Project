@@ -91,23 +91,26 @@ var CharacterPvp = React.createClass({
         var weeklyLost;
         var weeklyPlayed;
         var items;
-
+        
         if (!_.isUndefined(this.props.data)) {
             stats = this.props.data;
-            if (!_.isUndefined(stats[key].rating)) {
-                rating = stats[key].rating;
-            }
-            if (!_.isUndefined(stats[key].seasonLost)) {
-                seasonLost = stats[key].seasonLost;
-            }
-            if (!_.isUndefined(stats[key].seasonPlayed)) {
-                seasonPlayed = stats[key].seasonPlayed;
-            }
-            if (!_.isUndefined(stats[key].weeklyPlayed)) {
-                weeklyPlayed = stats[key].weeklyPlayed;
-            }
-            if (!_.isUndefined(stats[key].weeklyLost)) {
-                weeklyLost = stats[key].weeklyLost;
+            
+            if (!_.isUndefined(stats[key])) {
+                if (!_.isUndefined(stats[key].rating)) {
+                    rating = stats[key].rating;
+                }
+                if (!_.isUndefined(stats[key].seasonLost)) {
+                    seasonLost = stats[key].seasonLost;
+                }
+                if (!_.isUndefined(stats[key].seasonPlayed)) {
+                    seasonPlayed = stats[key].seasonPlayed;
+                }
+                if (!_.isUndefined(stats[key].weeklyPlayed)) {
+                    weeklyPlayed = stats[key].weeklyPlayed;
+                }
+                if (!_.isUndefined(stats[key].weeklyLost)) {
+                    weeklyLost = stats[key].weeklyLost;
+                }
             }
         }
         items = {

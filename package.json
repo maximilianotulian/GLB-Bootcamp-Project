@@ -4,7 +4,8 @@
   "description": "ReactJS Boilerplate",
   "main": "index.js",
   "scripts": {
-    "test": "karma start"
+    "test": "karma start",
+    "dev": "gulp"
   },
   "repository": {
     "type": "git",
